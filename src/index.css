@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Career Wave Academy Jind Design System - Educational Excellence */
+
+@layer base {
+  :root {
+    /* Core Academy Brand Colors */
+    --background: 248 250 252; /* Slate 50 - Clean background */
+    --foreground: 30 41 59; /* Slate 700 - Professional text */
+    
+    /* Primary Academy Blue */
+    --primary: 219 78 70%; /* Professional Blue #3b82f6 */
+    --primary-foreground: 248 250 252;
+    --primary-hover: 219 78 65%;
+    
+    /* Secondary Deeper Blue */
+    --secondary: 221 83 53%; /* Deeper Blue #1d4ed8 */
+    --secondary-foreground: 248 250 252;
+    
+    /* Success Green for Achievements */
+    --success: 142 76 36%; /* Green #10b981 */
+    --success-foreground: 248 250 252;
+    
+    /* Academy Card System */
+    --card: 0 0% 100%;
+    --card-foreground: 30 41 59;
+    --card-hover: 220 14% 96%;
+    
+    /* Educational Interface Elements */
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 30 41 59;
+    
+    /* Interactive Elements */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 219 78 70%;
+    
+    /* Educational Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(219 78% 70%), hsl(221 83% 53%));
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 31%));
+    --gradient-hero: linear-gradient(135deg, hsl(219 78% 70%) 0%, hsl(221 83% 53%) 50%, hsl(142 76% 36%) 100%);
+    
+    /* Academy Shadows */
+    --shadow-card: 0 4px 6px -1px hsl(219 78% 70% / 0.1), 0 2px 4px -1px hsl(219 78% 70% / 0.06);
+    --shadow-hero: 0 20px 25px -5px hsl(219 78% 70% / 0.1), 0 10px 10px -5px hsl(219 78% 70% / 0.04);
+    --shadow-float: 0 10px 15px -3px hsl(219 78% 70% / 0.1), 0 4px 6px -2px hsl(219 78% 70% / 0.05);
+    
+    /* Educational Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    --radius: 0.75rem;
+
+  }
+  
+  .dark {
+    --background: 30 41 59;
+    --foreground: 248 250 252;
+    --card: 30 41 59;
+    --card-foreground: 248 250 252;
+    --primary: 219 78 75%;
+    --primary-foreground: 30 41 59;
+    --secondary: 221 83 58%;
+    --secondary-foreground: 248 250 252;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-['Inter'];
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-['Poppins'];
+  }
+}
+
+@layer components {
+  /* Academy Hero Section */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  /* Academy Cards */
+  .academy-card {
+    @apply bg-card rounded-xl shadow-[var(--shadow-card)] 
+           hover:shadow-[var(--shadow-float)] 
+           transition-[var(--transition-smooth)] 
+           hover:bg-[hsl(var(--card-hover))]
+           hover:-translate-y-1;
+  }
+  
+  /* Course Cards */
+  .course-card {
+    @apply academy-card p-0 cursor-pointer overflow-hidden;
+    @apply hover:scale-[1.02] transition-[var(--transition-bounce)];
+  }
+  
+  .course-card:hover .course-icon {
+    @apply bg-primary text-primary-foreground;
+  }
+  
+  .course-card:hover .course-image {
+    @apply scale-110;
+  }
+  
+  /* Scroll Animations */
+  .scroll-fade-in {
+    @apply opacity-0 translate-y-8;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  /* Image Overlay Effects */
+  .image-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent;
+  }
+  
+  .shimmer-effect {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    background-size: 200px 100%;
+    @apply animate-shimmer;
+  }
+  
+  /* CTA Buttons */
+  .btn-primary {
+    @apply bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]
+           hover:bg-[hsl(var(--primary-hover))] 
+           px-6 py-3 rounded-lg font-medium
+           transition-[var(--transition-smooth)]
+           shadow-[var(--shadow-card)]
+           hover:shadow-[var(--shadow-float)];
+  }
+  
+  .btn-success {
+    background: var(--gradient-success);
+    @apply text-[hsl(var(--success-foreground))]
+           px-6 py-3 rounded-lg font-medium
+           transition-[var(--transition-smooth)]
+           shadow-[var(--shadow-card)]
+           hover:shadow-[var(--shadow-float)]
+           hover:scale-105;
+  }
+  
+  /* Academy Animations */
+  .fade-in-up {
+    @apply animate-[fadeInUp_0.6s_ease-out_forwards];
+  }
+  
+  .float-animation {
+    @apply animate-[float_3s_ease-in-out_infinite];
+  }
+}
