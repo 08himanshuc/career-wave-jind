@@ -26,6 +26,10 @@ const Hero = () => {
             </div>
             
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins font-bold leading-tight">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-orange-200">
+                CWA Jind
+              </span>
+              <br />
               Best Coaching Academy in{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-orange-200">
                 Jind City
