@@ -41,45 +41,45 @@ const About = () => {
     <section id="about" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fadeInUp">
-          <h2 className="text-4xl md:text-5xl font-poppins font-bold text-foreground mb-4">
+        <div className="text-center mb-16 animate-fadeInUp px-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-poppins font-bold text-foreground mb-4">
             About <span className="text-primary">Career Wave Academy Jind</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             Established as the leading coaching institute in Jind, Haryana, Career Wave Academy Jind is committed to providing exceptional education and nurturing future leaders. Located opposite DRDA, near Jeevan Deep Hospital in Shiv Colony, we serve students from across Jind and surrounding areas.
           </p>
         </div>
 
         {/* Main Content */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-20">
           {/* Content */}
-          <div className="space-y-6 animate-fadeInUp">
-            <h3 className="text-3xl font-poppins font-semibold text-foreground">
+          <div className="space-y-6 animate-fadeInUp px-4">
+            <h3 className="text-2xl sm:text-3xl font-poppins font-semibold text-foreground">
               Why Choose Career Wave Academy Jind?
             </h3>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
               Located in the heart of Jind City, opposite DRDA and near Jeevan Deep Hospital in Shiv Colony, Career Wave Academy Jind has been the cornerstone of academic excellence since 2009. We believe that every student has the potential to achieve greatness with the right guidance and support. Our strategic location makes us easily accessible to students from all parts of Jind, Haryana.
             </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
               Our state-of-the-art facilities include air-conditioned classrooms equipped with smart TVs, ensuring students learn in a comfortable environment that promotes focus and engagement. We specialize in NEET, IIT-JEE, CBSE, HBSE, and NDA preparation with a proven track record of success.
             </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
               At Career Wave Academy Jind, we understand the unique challenges faced by students preparing for competitive exams. Our expert faculty, comprehensive study materials, and personalized attention ensure that every student receives the support they need to excel in their chosen field.
             </p>
             
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 py-6">
+            <div className="grid grid-cols-3 gap-3 sm:gap-6 py-6">
               <div className="text-center animate-scaleIn" style={{animationDelay: '0.2s'}}>
-                <div className="text-3xl font-bold font-poppins text-primary animate-bounce-gentle">15+</div>
-                <div className="text-muted-foreground text-sm">Years Experience</div>
+                <div className="text-2xl sm:text-3xl font-bold font-poppins text-primary animate-bounce-gentle">15+</div>
+                <div className="text-muted-foreground text-xs sm:text-sm">Years Experience</div>
               </div>
               <div className="text-center animate-scaleIn" style={{animationDelay: '0.3s'}}>
-                <div className="text-3xl font-bold font-poppins text-primary animate-bounce-gentle" style={{animationDelay: '0.5s'}}>1200+</div>
-                <div className="text-muted-foreground text-sm">Success Stories</div>
+                <div className="text-2xl sm:text-3xl font-bold font-poppins text-primary animate-bounce-gentle" style={{animationDelay: '0.5s'}}>1200+</div>
+                <div className="text-muted-foreground text-xs sm:text-sm">Success Stories</div>
               </div>
               <div className="text-center animate-scaleIn" style={{animationDelay: '0.4s'}}>
-                <div className="text-3xl font-bold font-poppins text-primary animate-bounce-gentle" style={{animationDelay: '1s'}}>95%</div>
-                <div className="text-muted-foreground text-sm">Success Rate</div>
+                <div className="text-2xl sm:text-3xl font-bold font-poppins text-primary animate-bounce-gentle" style={{animationDelay: '1s'}}>95%</div>
+                <div className="text-muted-foreground text-xs sm:text-sm">Success Rate</div>
               </div>
             </div>
           </div>

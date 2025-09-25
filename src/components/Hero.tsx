@@ -16,8 +16,8 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-secondary/80"></div>
       </div>
 
-      <div className="relative container mx-auto px-4 py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative container mx-auto px-4 py-20 w-full max-w-full">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
           {/* Hero Content */}
           <div className="text-white space-y-6 animate-fadeInUp">
             <div className="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium">
@@ -25,30 +25,30 @@ const Hero = () => {
               Excellence in Education Since 2009
             </div>
             
-            <h1 className="text-4xl md:text-6xl font-poppins font-bold leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins font-bold leading-tight">
               Best Coaching Academy in{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-300">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-orange-200">
                 Jind City
               </span>
             </h1>
             
-            <p className="text-xl text-white/90 leading-relaxed max-w-lg">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed max-w-lg">
               Career Wave Academy Jind - Where dreams meet success. Expert coaching for NEET, IIT-JEE, CBSE & NDA with proven results. Located opposite DRDA, near Jeevan Deep Hospital, Shiv Colony, Jind, Haryana.
             </p>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 py-6">
+            <div className="grid grid-cols-3 gap-3 sm:gap-6 py-6">
               <div className="text-center animate-fadeInUp" style={{animationDelay: '0.3s'}}>
-                <div className="text-3xl font-bold font-poppins animate-bounce-gentle">1200+</div>
-                <div className="text-white/80 text-sm">Students Success</div>
+                <div className="text-2xl sm:text-3xl font-bold font-poppins animate-bounce-gentle">1200+</div>
+                <div className="text-white/80 text-xs sm:text-sm">Students Success</div>
               </div>
               <div className="text-center animate-fadeInUp" style={{animationDelay: '0.4s'}}>
-                <div className="text-3xl font-bold font-poppins animate-bounce-gentle" style={{animationDelay: '0.5s'}}>95%</div>
-                <div className="text-white/80 text-sm">Success Rate</div>
+                <div className="text-2xl sm:text-3xl font-bold font-poppins animate-bounce-gentle" style={{animationDelay: '0.5s'}}>95%</div>
+                <div className="text-white/80 text-xs sm:text-sm">Success Rate</div>
               </div>
               <div className="text-center animate-fadeInUp" style={{animationDelay: '0.5s'}}>
-                <div className="text-3xl font-bold font-poppins animate-bounce-gentle" style={{animationDelay: '1s'}}>15+</div>
-                <div className="text-white/80 text-sm">Years Experience</div>
+                <div className="text-2xl sm:text-3xl font-bold font-poppins animate-bounce-gentle" style={{animationDelay: '1s'}}>15+</div>
+                <div className="text-white/80 text-xs sm:text-sm">Years Experience</div>
               </div>
             </div>
 

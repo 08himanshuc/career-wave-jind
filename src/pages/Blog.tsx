@@ -121,7 +121,7 @@ const Blog = () => {
                       
                       {/* Coming Soon Badge */}
                       {post.comingSoon && (
-                        <div className="absolute top-4 left-4 bg-yellow-500 text-yellow-900 px-3 py-1 rounded-full text-sm font-medium">
+                        <div className="absolute top-4 left-4 bg-yellow-300 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">
                           Coming Soon
                         </div>
                       )}

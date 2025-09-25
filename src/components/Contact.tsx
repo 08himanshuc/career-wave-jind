@@ -43,16 +43,16 @@ const Contact = () => {
     <section id="contact" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fadeInUp">
-          <h2 className="text-4xl md:text-5xl font-poppins font-bold text-foreground mb-4">
+        <div className="text-center mb-16 animate-fadeInUp px-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-poppins font-bold text-foreground mb-4">
             Contact <span className="text-primary">Us</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
             Ready to start your journey to success? Get in touch with us today for admissions and course information.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
           {/* Contact Information */}
           <div className="space-y-8">
             <div className="animate-fadeInUp">
