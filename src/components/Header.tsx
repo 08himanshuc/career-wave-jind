@@ -45,7 +45,8 @@ const Header = () => {
             {/* Logo */}
             <div className="flex-shrink-0">
               <h1 className="text-2xl font-poppins font-bold text-primary">
-                <span className="text-yellow-600">CWA Jind</span> - Career Wave Academy
+                <span className="text-yellow-600">Career Wave Academy Jind</span>
+                <span className="text-sm text-muted-foreground ml-2">(CWA Jind)</span>
               </h1>
               <p className="text-xs text-muted-foreground -mt-1">Best Coaching in Jind</p>
             </div>
