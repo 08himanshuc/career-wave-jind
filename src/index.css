@@ -84,6 +84,7 @@
     @apply bg-background text-foreground font-['Inter'];
     overflow-x: hidden;
     max-width: 100vw;
+    background-color: #f8fafc; /* Ensure white background on all devices */
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -105,6 +106,16 @@
   /* Fix for any overflowing content */
   .overflow-x-hidden {
     overflow-x: hidden;
+  }
+  
+  /* Ensure consistent white background across all devices */
+  .bg-background {
+    background-color: #f8fafc !important;
+  }
+  
+  /* Override any muted backgrounds that might appear yellow on mobile */
+  .bg-muted {
+    background-color: #f1f5f9 !important;
   }
 }
 

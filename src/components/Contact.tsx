@@ -34,7 +34,7 @@ const Contact = () => {
       title: 'Office Hours',
       details: 'Mon-Sat: 9:00 AM - 8:00 PM',
       action: null,
-      bgColor: 'bg-muted',
+      bgColor: 'bg-gray-100',
       iconColor: 'text-muted-foreground',
     },
   ];
@@ -131,7 +131,7 @@ const Contact = () => {
           <div className="space-y-8 animate-fadeInUp">
             {/* Map with Click to Navigate */}
             <Card className="p-0 overflow-hidden">
-                <div className="aspect-video bg-muted/50 flex items-center justify-center relative group cursor-pointer"
+                <div className="aspect-video bg-gray-100 flex items-center justify-center relative group cursor-pointer"
                      onClick={() => window.open('https://www.google.com/maps/place/Career+Wave+Academy+Jind/@29.3118822,76.3288897,21z/data=!4m6!3m5!1s0x391205bc86cf8c95:0x1bdba88e7612f20d!8m2!3d29.3118912!4d76.328837!16s%2Fg%2F11h7cnmf24?entry=ttu&g_ep=EgoyMDI1MDkxMC4wIKXMDSoASAFQAw%3D%3D', '_blank')}>
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3498.123456789!2d76.3140234!3d29.3158774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a3a1234567890%3A0x1234567890abcdef!2sJind%2C%20Haryana!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"

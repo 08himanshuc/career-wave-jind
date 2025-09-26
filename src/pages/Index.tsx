@@ -9,9 +9,9 @@ import VideoPopup from '@/components/VideoPopup';
 
 const Index = () => {
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden bg-background">
       <Header />
-      <main className="overflow-x-hidden">
+      <main className="overflow-x-hidden bg-background">
         <Hero />
         <About />
         <Courses />
