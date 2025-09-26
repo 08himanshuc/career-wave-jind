@@ -1,12 +1,17 @@
 import { GraduationCap, Stethoscope, Calculator, Shield, ArrowRight, Phone, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import useScrollAnimation from '@/hooks/use-scroll-animation';
 import neetImage from '@/assets/neet-course.jpg';
 import iitJeeImage from '@/assets/iit-jee-course.jpg';
 import cbseImage from '@/assets/cbse-course.jpg';
 import ndaImage from '@/assets/nda-course.jpg';
 
 const Courses = () => {
+  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
+  const { ref: coursesRef, isVisible: coursesVisible } = useScrollAnimation();
+  const { ref: ctaRef, isVisible: ctaVisible } = useScrollAnimation();
+
   const courses = [
     {
       icon: Stethoscope,
@@ -46,7 +51,12 @@ const Courses = () => {
     <section id="courses" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fadeInUp px-4">
+        <div 
+          ref={headerRef}
+          className={`text-center mb-16 px-4 transition-all duration-700 ease-out ${
+            headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-poppins font-bold text-foreground mb-4">
             Our <span className="text-primary">Courses</span>
           </h2>
@@ -56,14 +66,23 @@ const Courses = () => {
         </div>
 
         {/* Courses Grid */}
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+        <div 
+          ref={coursesRef}
+          className={`grid md:grid-cols-2 gap-6 lg:gap-8 transition-all duration-700 ease-out ${
+            coursesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           {courses.map((course, index) => {
             const IconComponent = course.icon;
             return (
               <div 
                 key={course.title}
-                className="course-card relative animate-fadeInUp group"
-                style={{animationDelay: `${index * 0.15}s`}}
+                className="course-card relative group mobile-optimized"
+                style={{
+                  transitionDelay: `${index * 150}ms`,
+                  opacity: coursesVisible ? 1 : 0,
+                  transform: coursesVisible ? 'translateY(0) scale(1)' : 'translateY(30px) scale(0.95)'
+                }}
               >
                 {course.popular && (
                   <div className="absolute -top-3 left-6 bg-success text-success-foreground px-4 py-1 rounded-full text-sm font-medium z-10 animate-bounce-gentle">
@@ -114,7 +133,7 @@ const Courses = () => {
                   {/* CTA Buttons */}
                   <div className="flex gap-2">
                     <Button 
-                      className="btn-primary flex-1 group/btn"
+                      className="btn-primary flex-1 group/btn btn-smooth mobile-optimized"
                       onClick={() => window.location.href = 'tel:+918460597155'}
                     >
                       <Phone className="w-4 h-4 mr-2" />
@@ -122,7 +141,7 @@ const Courses = () => {
                     </Button>
                     <WhatsAppButton 
                       message={`Hi! I'm interested in ${course.title} course. Can you please provide more information about fees, duration, and admission process?`}
-                      className="btn-success flex-1"
+                      className="btn-success flex-1 btn-smooth mobile-optimized"
                     >
                       <MessageCircle className="w-4 h-4 mr-2" />
                       WhatsApp
@@ -135,8 +154,13 @@ const Courses = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center mt-16 animate-fadeInUp" style={{animationDelay: '0.8s'}}>
-          <div className="academy-card p-8 max-w-2xl mx-auto relative overflow-hidden">
+        <div 
+          ref={ctaRef}
+          className={`text-center mt-16 transition-all duration-700 ease-out ${
+            ctaVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <div className="academy-card p-8 max-w-2xl mx-auto relative overflow-hidden hover-lift">
             {/* Animated background gradient */}
             <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-success/5 animate-pulse-glow"></div>
             <div className="relative">
@@ -148,7 +172,7 @@ const Courses = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
-                  className="btn-primary text-lg px-8 py-4 animate-bounce-gentle"
+                  className="btn-primary text-lg px-8 py-4 btn-smooth mobile-optimized"
                   onClick={() => window.location.href = 'tel:+918460597155'}
                 >
                   <Phone className="w-5 h-5 mr-2" />
@@ -156,7 +180,7 @@ const Courses = () => {
                 </Button>
                 <WhatsAppButton 
                   message="Hi! I would like to get free counseling for Career Wave Academy Jind courses. Can you please help me choose the right course for my career goals?"
-                  className="btn-success text-lg px-8 py-4 animate-bounce-gentle"
+                  className="btn-success text-lg px-8 py-4 btn-smooth mobile-optimized"
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
                   WhatsApp Counseling

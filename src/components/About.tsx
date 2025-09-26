@@ -1,6 +1,12 @@
 import { Target, Eye, Heart, Users, BookOpen, Award } from 'lucide-react';
+import useScrollAnimation from '@/hooks/use-scroll-animation';
 
 const About = () => {
+  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
+  const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation();
+  const { ref: featuresRef, isVisible: featuresVisible } = useScrollAnimation();
+  const { ref: valuesRef, isVisible: valuesVisible } = useScrollAnimation();
+
   const values = [
     {
       icon: Target,
@@ -41,7 +47,12 @@ const About = () => {
     <section id="about" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fadeInUp px-4">
+        <div 
+          ref={headerRef}
+          className={`text-center mb-16 px-4 transition-all duration-700 ease-out ${
+            headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-poppins font-bold text-foreground mb-4">
             About <span className="text-primary">Career Wave Academy Jind</span>
           </h2>
@@ -53,7 +64,12 @@ const About = () => {
         {/* Main Content */}
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-20">
           {/* Content */}
-          <div className="space-y-6 animate-fadeInUp px-4">
+          <div 
+            ref={contentRef}
+            className={`space-y-6 px-4 transition-all duration-700 ease-out ${
+              contentVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+            }`}
+          >
             <h3 className="text-2xl sm:text-3xl font-poppins font-semibold text-foreground">
               Why Choose Career Wave Academy Jind?
             </h3>
@@ -85,14 +101,23 @@ const About = () => {
           </div>
 
           {/* Features Grid */}
-          <div className="space-y-6">
+          <div 
+            ref={featuresRef}
+            className={`space-y-6 transition-all duration-700 ease-out ${
+              featuresVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+            }`}
+          >
             {features.map((feature, index) => {
               const IconComponent = feature.icon;
               return (
                 <div 
                   key={feature.title}
-                  className="academy-card p-6 animate-fadeInRight group hover:bg-primary/5"
-                  style={{animationDelay: `${index * 0.15}s`}}
+                  className="academy-card p-6 group hover:bg-primary/5 hover-lift mobile-optimized"
+                  style={{
+                    transitionDelay: `${index * 100}ms`,
+                    opacity: featuresVisible ? 1 : 0,
+                    transform: featuresVisible ? 'translateY(0)' : 'translateY(20px)'
+                  }}
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 animate-pulse-glow">
@@ -114,14 +139,23 @@ const About = () => {
         </div>
 
         {/* Mission, Vision, Values */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div 
+          ref={valuesRef}
+          className={`grid md:grid-cols-3 gap-8 transition-all duration-700 ease-out ${
+            valuesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           {values.map((value, index) => {
             const IconComponent = value.icon;
             return (
               <div 
                 key={value.title}
-                className="academy-card p-8 text-center animate-scaleIn"
-                style={{animationDelay: `${index * 0.2}s`}}
+                className="academy-card p-8 text-center hover-lift mobile-optimized"
+                style={{
+                  transitionDelay: `${index * 150}ms`,
+                  opacity: valuesVisible ? 1 : 0,
+                  transform: valuesVisible ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)'
+                }}
               >
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <IconComponent className="w-8 h-8 text-primary" />

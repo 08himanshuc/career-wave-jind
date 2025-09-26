@@ -2,8 +2,13 @@ import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import useScrollAnimation from '@/hooks/use-scroll-animation';
 
 const Contact = () => {
+  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
+  const { ref: contactRef, isVisible: contactVisible } = useScrollAnimation();
+  const { ref: mapRef, isVisible: mapVisible } = useScrollAnimation();
+
   const contactInfo = [
     {
       icon: Phone,
@@ -43,7 +48,12 @@ const Contact = () => {
     <section id="contact" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fadeInUp px-4">
+        <div 
+          ref={headerRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mb-16 px-4 transition-all duration-700 ease-out ${
+            headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-poppins font-bold text-foreground mb-4">
             Contact <span className="text-primary">Us</span>
           </h2>
@@ -54,8 +64,13 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
           {/* Contact Information */}
-          <div className="space-y-8">
-            <div className="animate-fadeInUp">
+          <div 
+            ref={contactRef as React.RefObject<HTMLDivElement>}
+            className={`space-y-8 transition-all duration-700 ease-out ${
+              contactVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+            }`}
+          >
+            <div>
               <h3 className="text-3xl font-poppins font-semibold text-foreground mb-6">
                 Get In Touch
               </h3>
@@ -71,8 +86,12 @@ const Contact = () => {
                 return (
                   <Card 
                     key={info.title}
-                    className="p-6 hover:shadow-lg transition-all duration-200 animate-slideInRight"
-                    style={{animationDelay: `${index * 0.1}s`}}
+                    className="p-6 hover:shadow-lg transition-all duration-300 hover-lift mobile-optimized"
+                    style={{
+                      transitionDelay: `${index * 100}ms`,
+                      opacity: contactVisible ? 1 : 0,
+                      transform: contactVisible ? 'translateX(0)' : 'translateX(20px)'
+                    }}
                   >
                     <div className="flex items-center gap-4">
                       <div className={`w-12 h-12 ${info.bgColor} rounded-xl flex items-center justify-center`}>
@@ -108,7 +127,7 @@ const Contact = () => {
             </div>
 
             {/* Address */}
-            <Card className="p-6 animate-fadeInUp">
+            <Card className="p-6 hover-lift mobile-optimized">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
                   <MapPin className="w-6 h-6 text-primary" />
@@ -128,9 +147,14 @@ const Contact = () => {
           </div>
 
           {/* Map and CTA */}
-          <div className="space-y-8 animate-fadeInUp">
+          <div 
+            ref={mapRef as React.RefObject<HTMLDivElement>}
+            className={`space-y-8 transition-all duration-700 ease-out ${
+              mapVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+            }`}
+          >
             {/* Map with Click to Navigate */}
-            <Card className="p-0 overflow-hidden">
+            <Card className="p-0 overflow-hidden hover-lift mobile-optimized">
                 <div className="aspect-video bg-gray-100 flex items-center justify-center relative group cursor-pointer"
                      onClick={() => window.open('https://www.google.com/maps/place/Career+Wave+Academy+Jind/@29.3118822,76.3288897,21z/data=!4m6!3m5!1s0x391205bc86cf8c95:0x1bdba88e7612f20d!8m2!3d29.3118912!4d76.328837!16s%2Fg%2F11h7cnmf24?entry=ttu&g_ep=EgoyMDI1MDkxMC4wIKXMDSoASAFQAw%3D%3D', '_blank')}>
                 <iframe
@@ -153,7 +177,7 @@ const Contact = () => {
             </Card>
 
             {/* CTA Card */}
-            <Card className="p-8 text-center bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
+            <Card className="p-8 text-center bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20 hover-lift mobile-optimized">
               <h3 className="text-2xl font-poppins font-semibold text-foreground mb-4">
                 Ready to Join Career Wave Academy Jind?
               </h3>
@@ -162,7 +186,7 @@ const Contact = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
-                  className="btn-primary flex items-center gap-2"
+                  className="btn-primary flex items-center gap-2 btn-smooth mobile-optimized"
                   onClick={() => window.location.href = 'tel:+918460597155'}
                 >
                   <Phone className="w-4 h-4" />
@@ -170,7 +194,7 @@ const Contact = () => {
                 </Button>
                 <WhatsAppButton 
                   message="Hi! I'm interested in Career Wave Academy Jind courses. Can you please provide more information about admissions and course details?"
-                  className="btn-success flex items-center gap-2"
+                  className="btn-success flex items-center gap-2 btn-smooth mobile-optimized"
                 >
                   <MessageCircle className="w-4 h-4" />
                   WhatsApp
@@ -179,7 +203,7 @@ const Contact = () => {
             </Card>
 
             {/* Admission Info */}
-            <Card className="p-6 bg-success/5 border-success/20">
+            <Card className="p-6 bg-success/5 border-success/20 hover-lift mobile-optimized">
               <h4 className="font-poppins font-semibold text-foreground mb-2">
                 📚 Admissions Open
               </h4>

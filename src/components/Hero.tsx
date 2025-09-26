@@ -19,13 +19,13 @@ const Hero = () => {
       <div className="relative container mx-auto px-4 py-20 w-full max-w-full">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
           {/* Hero Content */}
-          <div className="text-white space-y-6 animate-fadeInUp">
-            <div className="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium">
+          <div className="text-white space-y-6">
+            <div className="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium animate-fadeInUp hover-glow">
               <Award className="w-4 h-4 mr-2" />
               Excellence in Education Since 2009
             </div>
             
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins font-bold leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins font-bold leading-tight animate-fadeInUp stagger-1">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-orange-200">
                 Career Wave Academy Jind
               </span>
@@ -38,7 +38,7 @@ const Hero = () => {
               </span>
             </h1>
             
-            <p className="text-lg sm:text-xl text-white/90 leading-relaxed max-w-lg">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed max-w-lg animate-fadeInUp stagger-2">
               Career Wave Academy Jind - Where dreams meet success. Expert coaching for NEET, IIT-JEE, CBSE & NDA with proven results. Located opposite DRDA, near Jeevan Deep Hospital, Shiv Colony, Jind, Haryana.
             </p>
 
@@ -59,18 +59,18 @@ const Hero = () => {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-fadeInUp stagger-3">
               <Button 
-                className="btn-success text-lg px-8 py-4 group"
+                className="btn-success text-lg px-8 py-4 group btn-smooth mobile-optimized"
                 onClick={() => window.location.href = 'tel:+918460597155'}
               >
                 <Phone className="w-5 h-5 mr-2" />
                 Contact Us Today
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
               </Button>
               <WhatsAppButton 
                   message="Hi! I'm interested in Career Wave Academy Jind courses. Can you please provide more information about admissions and course details?"
-                className="text-white border-white hover:bg-white hover:text-primary text-lg px-8 py-4"
+                className="text-white border-white hover:bg-white hover:text-primary text-lg px-8 py-4 btn-smooth mobile-optimized"
               >
                 <ArrowRight className="w-5 h-5 mr-2" />
                 WhatsApp Us

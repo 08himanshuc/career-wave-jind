@@ -51,9 +51,12 @@
     --shadow-hero: 0 20px 25px -5px hsl(219 78% 70% / 0.1), 0 10px 10px -5px hsl(219 78% 70% / 0.04);
     --shadow-float: 0 10px 15px -3px hsl(219 78% 70% / 0.1), 0 4px 6px -2px hsl(219 78% 70% / 0.05);
     
-    /* Educational Animations */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  /* Educational Animations */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-ease-out: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-ease-in-out: all 0.3s cubic-bezier(0.42, 0, 0.58, 1);
     
     --radius: 0.75rem;
 
@@ -95,12 +98,15 @@
   .container {
     max-width: 100%;
     overflow-x: hidden;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   
   /* Ensure all images are responsive */
   img {
     max-width: 100%;
     height: auto;
+    display: block;
   }
   
   /* Fix for any overflowing content */
@@ -117,6 +123,104 @@
   .bg-muted {
     background-color: #f1f5f9 !important;
   }
+
+  /* Mobile-specific optimizations */
+  @media (max-width: 768px) {
+    .container {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+    
+    /* Ensure text is readable on mobile */
+    h1, h2, h3, h4, h5, h6 {
+      line-height: 1.2;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+    
+    /* Improve touch targets */
+    button, a, [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Smooth scrolling on mobile */
+    html {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Prevent zoom on input focus */
+    input, textarea, select {
+      font-size: 16px;
+    }
+    
+    /* Ensure cards don't overflow on mobile */
+    .academy-card, .course-card {
+      margin: 0 0.5rem;
+      max-width: calc(100vw - 1rem);
+    }
+    
+    /* Fix floating action button positioning */
+    .fixed.bottom-6.right-6 {
+      bottom: 1rem;
+      right: 1rem;
+    }
+    
+    /* Ensure hero section fits on mobile */
+    .hero-gradient {
+      min-height: 100vh;
+      min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    }
+    
+    /* Fix grid layouts on mobile */
+    .grid {
+      gap: 1rem;
+    }
+    
+    /* Ensure images don't overflow */
+    img {
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+
+  /* Extra small mobile devices */
+  @media (max-width: 480px) {
+    .container {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+    
+    /* Smaller text on very small screens */
+    h1 {
+      font-size: 1.875rem; /* 30px */
+    }
+    
+    h2 {
+      font-size: 1.5rem; /* 24px */
+    }
+    
+    /* Stack buttons vertically on very small screens */
+    .flex.flex-col.sm\\:flex-row {
+      flex-direction: column;
+    }
+    
+    /* Reduce padding on cards */
+    .academy-card, .course-card {
+      padding: 1rem;
+    }
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
 @layer components {
@@ -129,15 +233,16 @@
   .academy-card {
     @apply bg-card rounded-xl shadow-[var(--shadow-card)] 
            hover:shadow-[var(--shadow-float)] 
-           transition-[var(--transition-smooth)] 
+           transition-[var(--transition-spring)] 
            hover:bg-[hsl(var(--card-hover))]
-           hover:-translate-y-1;
+           hover:-translate-y-2
+           hover:scale-[1.02];
   }
   
   /* Course Cards */
   .course-card {
     @apply academy-card p-0 cursor-pointer overflow-hidden;
-    @apply hover:scale-[1.02] transition-[var(--transition-bounce)];
+    @apply hover:scale-[1.03] transition-[var(--transition-spring)];
   }
   
   .course-card:hover .course-icon {
@@ -145,7 +250,7 @@
   }
   
   .course-card:hover .course-image {
-    @apply scale-110;
+    @apply scale-110 transition-transform duration-700 ease-out;
   }
   
   /* Scroll Animations */
@@ -192,5 +297,55 @@
   
   .float-animation {
     @apply animate-[float_3s_ease-in-out_infinite];
+  }
+
+  /* Smooth Scroll Animations */
+  .scroll-reveal {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+  
+  .scroll-reveal.revealed {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Staggered Animation Delays */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+
+  /* Mobile Optimizations */
+  .mobile-optimized {
+    @apply touch-manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Smooth Button Interactions */
+  .btn-smooth {
+    @apply transition-all duration-300 ease-out;
+    @apply hover:scale-105 active:scale-95;
+  }
+
+  /* Enhanced Hover Effects */
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+    @apply hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 ease-out;
+    @apply hover:shadow-[0_0_20px_hsl(var(--primary)/0.3)];
+  }
+
+  /* Loading States */
+  .loading-shimmer {
+    background: linear-gradient(90deg, 
+      hsl(var(--muted)) 25%, 
+      hsl(var(--muted-foreground)/0.1) 50%, 
+      hsl(var(--muted)) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
   }
 }
