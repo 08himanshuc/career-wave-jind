@@ -3,7 +3,10 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Breadcrumb from '@/components/Breadcrumb';
 import FloatingActionButton from '@/components/FloatingActionButton';
+import MobileCTABar from '@/components/MobileCTABar';
+import BackToTop from '@/components/BackToTop';
 import { Link } from 'react-router-dom';
 
 const Blog = () => {
@@ -55,7 +58,11 @@ const Blog = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="pt-20">
+      <main className="pt-8 pb-20 md:pb-0">
+        {/* Breadcrumb */}
+        <div className="container mx-auto px-4">
+          <Breadcrumb items={[{ label: 'Blog' }]} />
+        </div>
         {/* Hero Section */}
         <section className="py-20 bg-gradient-to-br from-primary/5 via-secondary/5 to-success/5">
           <div className="container mx-auto px-4">
@@ -183,24 +190,21 @@ const Blog = () => {
               })}
             </div>
 
-            {/* Newsletter Signup */}
+            {/* Coming Soon Notice */}
             <div className="mt-20">
               <Card className="p-8 text-center bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
                 <h3 className="text-2xl font-poppins font-semibold text-foreground mb-4">
-                  Stay Updated with Our Latest Posts
+                  More Articles Coming Soon!
                 </h3>
                 <p className="text-muted-foreground mb-6">
-                  Get notified when we publish new articles, study tips, and success stories.
+                  We're working on bringing you valuable content about exam preparation, study tips, and success strategies. Stay tuned!
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                  <input 
-                    type="email" 
-                    placeholder="Enter your email address"
-                    className="flex-1 px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                  />
-                  <Button className="btn-primary px-6 py-3">
-                    Subscribe
-                  </Button>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link to="/#contact">
+                    <Button className="btn-primary">
+                      Contact Us for Inquiries
+                    </Button>
+                  </Link>
                 </div>
               </Card>
             </div>
@@ -210,6 +214,8 @@ const Blog = () => {
 
       <Footer />
       <FloatingActionButton />
+      <MobileCTABar />
+      <BackToTop />
     </div>
   );
 };

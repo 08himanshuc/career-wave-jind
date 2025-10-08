@@ -1,0 +1,293 @@
+# CareerWave - Cursor AI Rules
+
+## Project Context
+CareerWave is an educational academy website offering courses for CBSE, IIT-JEE, NEET, and NDA preparation. The project is built with modern React and TypeScript, focusing on providing an excellent user experience for students and educators.
+
+## Tech Stack
+- **Framework**: React 18 with TypeScript
+- **Build Tool**: Vite
+- **Routing**: React Router v6
+- **UI Components**: shadcn/ui (Radix UI primitives)
+- **Styling**: Tailwind CSS with tailwindcss-animate
+- **Forms**: React Hook Form + Zod validation
+- **State Management**: TanStack Query (React Query)
+- **Icons**: Lucide React
+
+## Code Quality Standards
+
+### TypeScript
+- Always use TypeScript with strict type checking
+- Prefer interfaces over types for object shapes
+- Use proper type annotations for function parameters and return types
+- Avoid `any` type; use `unknown` if type is truly unknown
+- Define prop types for all React components using TypeScript interfaces
+
+### React Best Practices
+- Use functional components with hooks (no class components)
+- Follow hooks rules: call at top level, not in loops/conditions
+- Use proper dependency arrays in useEffect/useCallback/useMemo
+- Extract reusable logic into custom hooks (place in `/src/hooks`)
+- Keep components focused and single-responsibility
+- Prefer composition over prop drilling; use context when needed
+
+### Component Structure
+```tsx
+// Standard component structure:
+import { ComponentProps } from "react";
+import { cn } from "@/lib/utils";
+
+interface MyComponentProps {
+  // Props definition
+}
+
+export const MyComponent = ({ prop1, prop2 }: MyComponentProps) => {
+  // 1. Hooks
+  // 2. Event handlers
+  // 3. Derived state/calculations
+  // 4. Return JSX
+  
+  return (
+    <div className={cn("base-classes", conditionalClasses)}>
+      {/* Content */}
+    </div>
+  );
+};
+```
+
+### File Organization
+- **Components**: `/src/components/` - Reusable UI components
+- **Pages**: `/src/pages/` - Route-level components
+- **Hooks**: `/src/hooks/` - Custom React hooks
+- **Utils**: `/src/lib/` - Utility functions
+- **UI**: `/src/components/ui/` - shadcn/ui components (don't modify directly)
+
+### Styling Guidelines
+- Use Tailwind CSS utility classes
+- Follow mobile-first responsive design
+- Use `cn()` utility from `/src/lib/utils.ts` to merge classes
+- Maintain consistent spacing: use Tailwind's spacing scale (4, 8, 12, 16, etc.)
+- Use semantic color tokens: `text-foreground`, `bg-background`, `border-border`, etc.
+- Animations: use `tailwindcss-animate` utilities or define in tailwind.config.ts
+
+### Form Handling
+- Use React Hook Form with Zod schema validation
+- Define Zod schemas at component level or in separate validation file
+- Use shadcn/ui form components for consistent UX
+- Always provide clear validation error messages
+- Handle loading and error states explicitly
+
+```tsx
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+
+const formSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  // ... other fields
+});
+
+type FormData = z.infer<typeof formSchema>;
+
+// Use in component with zodResolver
+```
+
+### Data Fetching
+- Use TanStack Query for server state management
+- Define query keys as constants
+- Handle loading, error, and success states
+- Use proper TypeScript types for API responses
+- Implement optimistic updates where appropriate
+
+### Accessibility
+- Use semantic HTML elements
+- Include proper ARIA labels for interactive elements
+- Ensure keyboard navigation works properly
+- Test with screen readers when adding complex interactions
+- Maintain proper heading hierarchy (h1 → h2 → h3)
+
+### Performance
+- Lazy load routes and heavy components
+- Optimize images: use proper formats and sizes
+- Memoize expensive calculations with useMemo
+- Use React.memo for expensive pure components
+- Debounce/throttle frequent operations (search, scroll, resize)
+
+### Code Style
+- Use ES6+ features: arrow functions, destructuring, template literals
+- Prefer const over let; never use var
+- Use async/await over promise chains
+- Extract magic numbers/strings to named constants
+- Keep functions small and focused (< 50 lines ideally)
+- Write self-documenting code; add comments only for complex logic
+
+### Component Naming
+- PascalCase for components: `ContactForm`, `HeroSection`
+- camelCase for functions/variables: `handleSubmit`, `isLoading`
+- UPPER_SNAKE_CASE for constants: `MAX_FILE_SIZE`, `API_ENDPOINT`
+- Prefix custom hooks with "use": `useScrollAnimation`, `useMobile`
+
+### Import Organization
+1. React and external libraries
+2. Internal components and hooks
+3. Utils and types
+4. Styles and assets
+
+```tsx
+// External
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+
+// Internal components
+import { Button } from "@/components/ui/button";
+import { Header } from "@/components/Header";
+
+// Utils/Types
+import { cn } from "@/lib/utils";
+import type { Course } from "@/types";
+
+// Assets
+import heroImage from "@/assets/hero-academy.jpg";
+```
+
+### Git Commit Messages
+- Use conventional commits: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `test:`, `chore:`
+- Keep first line under 72 characters
+- Be descriptive but concise
+- Reference issues when applicable
+
+### Testing Mindset
+- Think about edge cases when implementing features
+- Validate user inputs thoroughly
+- Handle error states gracefully with user-friendly messages
+- Test responsive behavior across breakpoints
+- Verify accessibility with keyboard and screen readers
+
+### Educational Platform Specific
+- Ensure clear course information presentation
+- Make contact forms intuitive and validating
+- Optimize for mobile as students access on various devices
+- Consider loading states for course images/content
+- Keep navigation simple and predictable for all age groups
+
+## Development Workflow (Think-Plan-Apply-Recheck)
+
+For every significant task or feature, follow this structured process:
+
+### 1. Think (Triple-Check)
+- **First Pass**: Analyze task requirements, identify potential challenges and edge cases
+- **Second Pass**: Consider alternative approaches, evaluate best tools/patterns to use
+- **Third Pass**: Validate approach against project goals (clean UI, smooth UX, type safety)
+- Reflect on alignment with existing codebase patterns and modern React/TypeScript best practices
+
+### 2. Plan
+- Create a clear step-by-step implementation plan
+- Identify specific technologies, components, and utilities to use
+- Consider UX implications: responsiveness, accessibility, performance
+- If uncertain about any aspect, search the web for 2025 best practices or ask the user for clarification
+- Document expected outcome and potential edge cases
+
+### 3. Apply
+- Write clean, well-documented code following project standards
+- Implement incrementally and test each piece
+- Ensure responsiveness across devices (mobile-first approach)
+- Follow accessibility standards (semantic HTML, ARIA labels, keyboard navigation)
+- Optimize for performance (lazy loading, code splitting, memoization)
+
+### 4. Recheck
+- Review output against original requirements
+- Validate UI: Visual consistency, spacing, modern aesthetics
+- Validate UX: Smooth interactions, intuitive navigation, fast load times
+- Validate Code: TypeScript errors, linting, clean structure
+- Test functionality: No bugs, broken links, or runtime errors
+- If issues found, fix and recheck until requirements are met
+
+## Handling Unknowns or Ambiguities
+
+When uncertain about a task or requirement:
+
+1. **Ask the User**: Prompt with specific questions to clarify requirements
+   - Example: "Should this form use optimistic updates or show a loading state?"
+   
+2. **Web Search**: For design trends, best practices, or new technologies
+   - Search for current web development standards and modern UI/UX patterns
+   - Cross-reference multiple sources for accuracy
+   
+3. **Default to Best Practices**: When no clarification available
+   - Use established patterns from the codebase
+   - Follow React/TypeScript industry standards
+   - Reference shadcn/ui documentation for component usage
+
+## Quality Assurance Checklist
+
+Before completing any task, verify:
+
+- ✅ **TypeScript**: No type errors, proper interfaces defined
+- ✅ **Linting**: Code passes ESLint checks
+- ✅ **Responsive**: Works on mobile, tablet, and desktop
+- ✅ **Accessibility**: Keyboard navigation, ARIA labels, semantic HTML
+- ✅ **Performance**: Optimized images, lazy loading, minimal re-renders
+- ✅ **UX**: Intuitive interactions, loading states, error handling
+- ✅ **Code Quality**: DRY principles, meaningful names, proper comments
+- ✅ **Consistency**: Matches existing codebase patterns and style
+
+## When Making Changes
+1. **Read before editing**: Always check existing patterns in the codebase
+2. **Consistency**: Match the existing code style and patterns
+3. **Test**: Verify changes work across different screen sizes
+4. **Types**: Ensure TypeScript types are accurate and helpful
+5. **Accessibility**: Don't break keyboard navigation or screen reader support
+6. **Follow Workflow**: Apply Think-Plan-Apply-Recheck process for complex tasks
+
+## Modern Design Principles (2025 Standards)
+
+### UI/UX Trends for Educational Platforms
+- **Clean, Minimalistic Design**: Ample whitespace, consistent typography, uncluttered layouts
+- **Glassmorphism**: Use for cards, modals (semi-transparent backgrounds with blur effects)
+- **Micro-interactions**: Subtle animations on buttons, form inputs, hover states
+- **Bold Typography**: Clear hierarchy with modern font families (Inter, Poppins)
+- **Vibrant Gradients**: Professional color gradients for CTAs and hero sections
+- **Card-based Layouts**: For courses, testimonials, blog posts
+- **Immersive Scrolling**: Smooth scroll behaviors and reveal animations
+
+### UX Priorities for Students
+- **Mobile-First**: Students access on various devices - optimize for mobile experience
+- **Fast Load Times**: Optimize images, lazy load content, minimize bundle size
+- **Intuitive Navigation**: Clear CTA buttons, sticky headers, breadcrumbs where needed
+- **Accessible**: High contrast, keyboard navigation, screen reader support
+- **Interactive Elements**: Course filters, search, testimonial sliders
+- **Clear Information Hierarchy**: Important course details easily scannable
+
+### Key Pages Best Practices
+- **Homepage**: Strong hero with CTA, course highlights, social proof (testimonials)
+- **Course Catalog**: Filterable/searchable grid, clear pricing and duration
+- **Contact Forms**: Smooth validation, loading states, success feedback
+- **About Page**: Team showcase, mission statement, achievements
+- **Student Portal** (if applicable): Clean dashboard, progress tracking
+
+## Common Patterns in This Project
+- **Routing**: Define routes in `App.tsx`
+- **Animations**: Use custom hooks like `useScrollAnimation` for scroll effects
+- **Mobile detection**: Use `useMobile` hook for responsive behavior
+- **Toasts**: Use Sonner or shadcn toast for notifications
+- **WhatsApp integration**: WhatsAppButton component for direct contact
+- **Video content**: VideoPopup component for embedded videos
+
+## Don't
+- ❌ Modify files in `/src/components/ui/` directly (shadcn managed)
+- ❌ Use inline styles; use Tailwind classes
+- ❌ Commit console.logs in production code
+- ❌ Ignore TypeScript errors; fix them properly
+- ❌ Create large monolithic components; split them up
+- ❌ Forget to handle loading/error states in async operations
+- ❌ Use deprecated React patterns (componentDidMount, etc.)
+
+## Do
+- ✅ Use existing shadcn/ui components when available
+- ✅ Maintain component reusability
+- ✅ Write semantic, accessible HTML
+- ✅ Keep business logic separate from presentation
+- ✅ Use proper TypeScript types
+- ✅ Follow the established folder structure
+- ✅ Test on mobile viewports
+- ✅ Use proper error boundaries for error handling
+

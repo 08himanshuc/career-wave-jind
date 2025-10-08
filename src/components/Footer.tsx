@@ -5,6 +5,9 @@ const Footer = () => {
   const quickLinks = [
     { name: 'About Us', href: '#about' },
     { name: 'Courses', href: '#courses' },
+    { name: 'Achievers', href: '#achievers' },
+    { name: 'Gallery', href: '#gallery' },
+    { name: 'FAQ', href: '#faq' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -143,10 +146,27 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-white/60 text-sm">
-              © 2025 Career Wave Academy Jind. All rights reserved.
-            </p>
-            <p className="text-white/60 text-sm">
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+              <p className="text-white/60 text-sm">
+                © 2025 Career Wave Academy Jind. All rights reserved.
+              </p>
+              <div className="flex items-center gap-3 text-white/60 text-sm">
+                <Link 
+                  to="/privacy-policy"
+                  className="hover:text-white transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+                <span>•</span>
+                <Link 
+                  to="/terms"
+                  className="hover:text-white transition-colors"
+                >
+                  Terms & Conditions
+                </Link>
+              </div>
+            </div>
+            <p className="text-white/60 text-sm text-center md:text-right">
               Best Coaching Academy in Jind City | NEET | IIT-JEE | CBSE | NDA
             </p>
           </div>

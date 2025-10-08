@@ -1,4 +1,5 @@
 import { GraduationCap, Stethoscope, Calculator, Shield, ArrowRight, Phone, MessageCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import useScrollAnimation from '@/hooks/use-scroll-animation';
@@ -14,6 +15,7 @@ const Courses = () => {
 
   const courses = [
     {
+      id: 'neet',
       icon: Stethoscope,
       title: 'NEET Coaching',
       description: 'Complete preparation for medical entrance with expert biology, chemistry & physics coaching.',
@@ -22,6 +24,7 @@ const Courses = () => {
       popular: true,
     },
     {
+      id: 'iitjee',
       icon: Calculator,
       title: 'IIT-JEE Coaching',
       description: 'Comprehensive JEE Main & Advanced preparation with advanced problem-solving techniques.',
@@ -30,6 +33,7 @@ const Courses = () => {
       popular: false,
     },
     {
+      id: 'cbse',
       icon: GraduationCap,
       title: 'CBSE & HBSE Classes',
       description: 'Board exam preparation for Class 11th & 12th with conceptual clarity and exam strategy.',
@@ -38,6 +42,7 @@ const Courses = () => {
       popular: false,
     },
     {
+      id: 'nda',
       icon: Shield,
       title: 'NDA Preparation',
       description: 'National Defence Academy coaching with comprehensive math, GAT & SSB interview prep.',
@@ -131,21 +136,32 @@ const Courses = () => {
                   </div>
 
                   {/* CTA Buttons */}
-                  <div className="flex gap-2">
-                    <Button 
-                      className="btn-primary flex-1 group/btn btn-smooth mobile-optimized"
-                      onClick={() => window.location.href = 'tel:+918460597155'}
-                    >
-                      <Phone className="w-4 h-4 mr-2" />
-                      Call Now
-                    </Button>
-                    <WhatsAppButton 
-                      message={`Hi! I'm interested in ${course.title} course. Can you please provide more information about fees, duration, and admission process?`}
-                      className="btn-success flex-1 btn-smooth mobile-optimized"
-                    >
-                      <MessageCircle className="w-4 h-4 mr-2" />
-                      WhatsApp
-                    </WhatsAppButton>
+                  <div className="flex flex-col gap-3">
+                    <Link to={`/courses/${course.id}`} className="w-full">
+                      <Button 
+                        variant="outline"
+                        className="w-full group/btn btn-smooth mobile-optimized border-primary text-primary hover:bg-primary hover:text-white"
+                      >
+                        Learn More
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                      </Button>
+                    </Link>
+                    <div className="flex gap-2">
+                      <Button 
+                        className="btn-primary flex-1 group/btn btn-smooth mobile-optimized"
+                        onClick={() => window.location.href = 'tel:+918460597155'}
+                      >
+                        <Phone className="w-4 h-4 mr-2" />
+                        Call
+                      </Button>
+                      <WhatsAppButton 
+                        message={`Hi! I'm interested in ${course.title} course. Can you please provide more information about fees, duration, and admission process?`}
+                        className="btn-success flex-1 btn-smooth mobile-optimized"
+                      >
+                        <MessageCircle className="w-4 h-4 mr-2" />
+                        WhatsApp
+                      </WhatsAppButton>
+                    </div>
                   </div>
                 </div>
               </div>
