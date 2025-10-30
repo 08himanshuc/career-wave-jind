@@ -23,16 +23,31 @@ const BackToTop = () => {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
+    console.log('BackToTop handler fired!');
+    // Try all common scrollable containers and window
+    const selectors = ['main', '.main', '.container', '#root', 'body', 'html'];
+    selectors.forEach(sel => {
+      const el = document.querySelector(sel);
+      if (el && el.scrollTo) {
+        try {
+          el.scrollTo({ top: 0, behavior: 'smooth' });
+        } catch {
+          try {
+            el.scrollTop = 0;
+          } catch {}
+        }
+      }
     });
+    // Always fallback to window
+    try {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch {}
   };
 
   return (
     <div
-      className={`fixed bottom-24 right-6 z-40 transition-all duration-300 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+      className={`fixed bottom-28 right-6 z-50 transition-all duration-300 ${
+        isVisible ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
     >
       <Button

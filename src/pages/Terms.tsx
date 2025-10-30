@@ -190,7 +190,7 @@ const Terms = () => {
                     Huda Market, Shiv Colony, Jind, Haryana - 126102
                   </p>
                   <p className="text-muted-foreground">
-                    <strong>Phone:</strong> <a href="tel:+918460597155" className="text-primary hover:underline">+91 84605 97155</a>
+                    <strong>Phone:</strong> <a href="tel:+919812726612" className="text-primary hover:underline">+91 98127 26612</a>
                   </p>
                   <p className="text-muted-foreground">
                     <strong>Email:</strong> <a href="mailto:info@cwajind.in" className="text-primary hover:underline">info@cwajind.in</a>

@@ -19,8 +19,8 @@ const Courses = () => {
       icon: Stethoscope,
       title: 'NEET Coaching',
       description: 'Complete preparation for medical entrance with expert biology, chemistry & physics coaching.',
-      features: ['Expert Faculty', 'Mock Tests', 'Study Material', '1-on-1 Doubt Sessions'],
-      image: neetImage,
+      features: ['Monthly NEET Tests', 'Books Provided', 'Parent Reports', 'Smart Class (AC/CCTV)'],
+      image: 'https://ik.imagekit.io/mony/neet-coaching-jind.webp?updatedAt=1758193044020',
       popular: true,
     },
     {
@@ -28,8 +28,8 @@ const Courses = () => {
       icon: Calculator,
       title: 'IIT-JEE Coaching',
       description: 'Comprehensive JEE Main & Advanced preparation with advanced problem-solving techniques.',
-      features: ['Advanced Math', 'Physics Labs', 'Chemistry Practicals', 'Previous Year Papers'],
-      image: iitJeeImage,
+      features: ['Monthly JEE Tests', 'Books Provided', 'Parent Reports', 'Smart Class (AC/CCTV)'],
+      image: 'https://ik.imagekit.io/mony/jee-coaching-jind.webp?updatedAt=1758193015818',
       popular: false,
     },
     {
@@ -37,8 +37,8 @@ const Courses = () => {
       icon: GraduationCap,
       title: 'CBSE & HBSE Classes',
       description: 'Board exam preparation for Class 11th & 12th with conceptual clarity and exam strategy.',
-      features: ['Board Pattern', 'Sample Papers', 'Regular Tests', 'Progress Tracking'],
-      image: cbseImage,
+      features: ['Monthly Board Tests', 'Books Provided', 'Parent Reports', 'Smart Class (AC/CCTV)'],
+      image: 'https://ik.imagekit.io/mony/hbse-academy-jind.jpg?updatedAt=1758192979181',
       popular: false,
     },
     {
@@ -46,8 +46,8 @@ const Courses = () => {
       icon: Shield,
       title: 'NDA Preparation',
       description: 'National Defence Academy coaching with comprehensive math, GAT & SSB interview prep.',
-      features: ['Mathematics', 'General Ability', 'SSB Interview', 'Physical Training'],
-      image: ndaImage,
+      features: ['Monthly NDA Tests', 'Books Provided', 'Parent Reports', 'Smart Class (AC/CCTV)'],
+      image: 'https://ik.imagekit.io/mony/NDA-coaching-jind.webp?updatedAt=1758192949347',
       popular: false,
     },
   ];
@@ -149,7 +149,7 @@ const Courses = () => {
                     <div className="flex gap-2">
                       <Button 
                         className="btn-primary flex-1 group/btn btn-smooth mobile-optimized"
-                        onClick={() => window.location.href = 'tel:+918460597155'}
+                        onClick={() => window.location.href = 'tel:+919812726612'}
                       >
                         <Phone className="w-4 h-4 mr-2" />
                         Call
@@ -189,7 +189,7 @@ const Courses = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   className="btn-primary text-lg px-8 py-4 btn-smooth mobile-optimized"
-                  onClick={() => window.location.href = 'tel:+918460597155'}
+                  onClick={() => window.location.href = 'tel:+919812726612'}
                 >
                   <Phone className="w-5 h-5 mr-2" />
                   Call for Free Counseling

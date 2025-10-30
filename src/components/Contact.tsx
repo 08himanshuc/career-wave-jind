@@ -13,16 +13,16 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Phone',
-      details: '+91 84605 97155',
-      action: 'tel:+918460597155',
+      details: '+91 98127 26612',
+      action: 'tel:+919812726612',
       bgColor: 'bg-primary/10',
       iconColor: 'text-primary',
     },
     {
       icon: MessageCircle,
       title: 'WhatsApp',
-      details: '+91 84605 97155',
-      action: 'https://wa.me/918460597155',
+      details: '+91 98127 26612',
+      action: 'https://wa.me/919812726612',
       bgColor: 'bg-success/10',
       iconColor: 'text-success',
     },
@@ -187,7 +187,7 @@ const Contact = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   className="btn-primary flex items-center gap-2 btn-smooth mobile-optimized"
-                  onClick={() => window.location.href = 'tel:+918460597155'}
+                  onClick={() => window.location.href = 'tel:+919812726612'}
                 >
                   <Phone className="w-4 h-4" />
                   Call Now

@@ -62,7 +62,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-fadeInUp stagger-3">
               <Button 
                 className="btn-success text-lg px-8 py-4 group btn-smooth mobile-optimized"
-                onClick={() => window.location.href = 'tel:+918460597155'}
+                onClick={() => window.location.href = 'tel:+919812726612'}
               >
                 <Phone className="w-5 h-5 mr-2" />
                 Contact Us Today

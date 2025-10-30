@@ -15,7 +15,7 @@ const MobileCTABar = () => {
           {/* Call Button */}
           <Button
             className="flex-1 btn-primary flex items-center justify-center gap-2 h-12 mobile-optimized"
-            onClick={() => window.location.href = 'tel:+918460597155'}
+            onClick={() => window.location.href = 'tel:+919812726612'}
           >
             <Phone className="w-5 h-5" />
             <span className="font-semibold">Call Now</span>
@@ -24,7 +24,7 @@ const MobileCTABar = () => {
           {/* WhatsApp Button */}
           <Button
             className="flex-1 bg-[#25D366] hover:bg-[#20BA5A] text-white flex items-center justify-center gap-2 h-12 mobile-optimized"
-            onClick={() => window.open('https://wa.me/918460597155?text=Hi!%20I%27m%20interested%20in%20Career%20Wave%20Academy%20Jind%20courses.', '_blank')}
+            onClick={() => window.open('https://wa.me/919812726612?text=Hi!%20I%27m%20interested%20in%20Career%20Wave%20Academy%20Jind%20courses.', '_blank')}
           >
             <MessageCircle className="w-5 h-5" />
             <span className="font-semibold">WhatsApp</span>

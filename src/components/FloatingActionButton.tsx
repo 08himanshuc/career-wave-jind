@@ -9,14 +9,14 @@ const FloatingActionButton = () => {
     {
       icon: Phone,
       label: 'Call Now',
-      action: () => window.location.href = 'tel:+918460597155',
+      action: () => window.location.href = 'tel:+919812726612',
       color: 'bg-primary hover:bg-primary/90',
       delay: 'delay-75'
     },
     {
       icon: MessageCircle,
       label: 'WhatsApp',
-      action: () => window.open('https://wa.me/918460597155', '_blank'),
+      action: () => window.open('https://wa.me/919812726612', '_blank'),
       color: 'bg-green-500 hover:bg-green-600',
       delay: 'delay-100'
     },

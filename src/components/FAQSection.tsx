@@ -15,15 +15,15 @@ const FAQSection = () => {
   const faqs = [
     {
       question: "What courses does Career Wave Academy Jind offer?",
-      answer: "We offer comprehensive coaching for NEET (Medical), IIT-JEE (Engineering), CBSE & HBSE Board Classes (6th to 12th), and NDA (Defence) preparation. Each course is designed with expert faculty and proven teaching methodologies."
+      answer: "We offer comprehensive coaching for NEET (Medical), IIT-JEE (Engineering), CBSE & HBSE Board Classes (9th to 12th), and NDA (Defence) preparation. Each course is designed with expert faculty and proven teaching methodologies."
     },
     {
       question: "What is the admission process and fee structure?",
-      answer: "Admissions are open throughout the year with limited seats per batch. Fee structure varies by course and class. Please contact us at +91 84605 97155 for detailed fee information and available payment plans. We also offer scholarships for meritorious students."
+      answer: "Admissions are open throughout the year with limited seats per batch. Fee structure varies by course and class. Please contact us at +91 98127 26612 for detailed fee information and available payment plans. We also offer scholarships for meritorious students."
     },
     {
       question: "What are the batch timings?",
-      answer: "We offer flexible batch timings including morning, afternoon, and evening batches to accommodate school and college schedules. Weekend batches are also available for working students. Contact us to find a batch that fits your schedule."
+      answer: "Our classes run primarily in the morning and afternoon. Exact class timings vary by course and section. Please contact us for the latest schedule and availability."
     },
     {
       question: "What is your teaching methodology?",
@@ -48,10 +48,6 @@ const FAQSection = () => {
     {
       question: "Do you offer online classes?",
       answer: "We primarily focus on offline classroom teaching for better interaction and learning outcomes. However, we do provide online doubt-clearing sessions and recorded lectures for revision. Contact us for more details on hybrid learning options."
-    },
-    {
-      question: "What happens if a student misses a class?",
-      answer: "We understand that students may occasionally miss classes. We provide recorded sessions for missed classes and dedicated doubt-clearing sessions. Our faculty ensures that no student falls behind in the curriculum."
     }
   ];
 
@@ -108,13 +104,13 @@ const FAQSection = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="tel:+918460597155"
+                href="tel:+919812726612"
                 className="inline-flex items-center justify-center btn-primary px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105"
               >
-                Call +91 84605 97155
+                Call +91 98127 26612
               </a>
               <a
-                href="https://wa.me/918460597155?text=Hi!%20I%20have%20some%20questions%20about%20Career%20Wave%20Academy."
+                href="https://wa.me/919812726612?text=Hi!%20I%20have%20some%20questions%20about%20Career%20Wave%20Academy."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20BA5A] text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105"

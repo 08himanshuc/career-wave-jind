@@ -35,10 +35,10 @@ const courseData = {
     highlights: [
       'Experienced Medical Faculty',
       'Complete NCERT Coverage',
-      'Regular Mock Tests',
-      'Doubt Clearing Sessions',
-      'Previous Year Questions',
-      'Study Material Provided'
+      'Monthly NEET Pattern Tests',
+      'Books/Study Material Provided',
+      'Progress Reports Shared with Parents',
+      'Digital LED Smart Classes, AC & CCTV Enabled'
     ],
     syllabus: [
       { subject: 'Physics', topics: 'Mechanics, Thermodynamics, Optics, Modern Physics, Electromagnetism' },
@@ -46,9 +46,9 @@ const courseData = {
       { subject: 'Biology', topics: 'Botany (Plant Physiology, Genetics), Zoology (Human Physiology, Evolution)' }
     ],
     duration: '1-2 Years',
-    batchSize: '25-30 Students',
-    schedule: 'Morning & Evening Batches Available',
-    eligibility: 'Class 11th, 12th, 12th Pass Students'
+    batchSize: 'Max 50 Students',
+    schedule: 'Morning & Afternoon Batches',
+    eligibility: 'Class 11th, 12th, 12th Pass (Dropout)'
   },
   iitjee: {
     id: 'iitjee',
@@ -60,10 +60,10 @@ const courseData = {
     highlights: [
       'IIT Alumni Faculty',
       'JEE Main + Advanced Prep',
-      'Conceptual Learning Focus',
-      'Weekly Problem Solving',
-      'Regular Assessment Tests',
-      'Personal Mentoring'
+      'Monthly JEE Pattern Tests',
+      'Books/Study Material Provided',
+      'Progress Reports Shared with Parents',
+      'Digital LED Smart Classes, AC & CCTV Enabled'
     ],
     syllabus: [
       { subject: 'Physics', topics: 'Classical Mechanics, Waves & Thermodynamics, Electricity & Magnetism, Modern Physics' },
@@ -71,24 +71,24 @@ const courseData = {
       { subject: 'Mathematics', topics: 'Calculus, Algebra, Trigonometry, Coordinate Geometry, Vectors & 3D' }
     ],
     duration: '1-2 Years',
-    batchSize: '20-25 Students',
-    schedule: 'Morning & Evening Batches Available',
-    eligibility: 'Class 11th, 12th, 12th Pass Students'
+    batchSize: 'Max 50 Students',
+    schedule: 'Morning & Afternoon Batches',
+    eligibility: 'Class 11th, 12th, 12th Pass (Dropout)'
   },
   cbse: {
     id: 'cbse',
     title: 'CBSE & HBSE Classes',
-    subtitle: 'Board Exam Preparation (6th to 12th)',
-    description: 'Complete board exam preparation for CBSE and HBSE students from Class 6th to 12th. Focus on strong fundamentals, exam techniques, and scoring 95%+ marks.',
+    subtitle: 'Board Exam Preparation (9th to 12th)',
+    description: 'Board exam preparation for Classes 9th to 12th with strong fundamentals, exam strategy, and consistent evaluation.',
     image: cbseImage,
     color: 'bg-purple-500',
     highlights: [
       'NCERT Based Teaching',
-      'Chapter-wise Tests',
-      'Practical Sessions',
-      'Revision Classes',
-      'Sample Papers',
-      'Previous Year Solutions'
+      'Monthly Board Pattern Tests',
+      'Books/Study Material Provided',
+      'Progress Reports Shared with Parents',
+      'Digital LED Smart Classes, AC & CCTV Enabled',
+      'Revision & Doubt Sessions'
     ],
     syllabus: [
       { subject: 'Science Stream', topics: 'Physics, Chemistry, Mathematics/Biology, English, Optional Subject' },
@@ -96,9 +96,9 @@ const courseData = {
       { subject: 'Arts Stream', topics: 'History, Political Science, Economics, English, Optional Subjects' }
     ],
     duration: '1 Academic Year',
-    batchSize: '30-35 Students',
-    schedule: 'Afternoon & Evening Batches',
-    eligibility: 'Students of Class 6th to 12th'
+    batchSize: 'Max 50 Students',
+    schedule: 'Morning & Afternoon Batches',
+    eligibility: 'Students of Class 9th to 12th'
   },
   nda: {
     id: 'nda',
@@ -110,10 +110,10 @@ const courseData = {
     highlights: [
       'Mathematics Expert Faculty',
       'GAT Complete Coverage',
-      'SSB Interview Prep',
-      'Physical Fitness Guidance',
-      'Current Affairs Updates',
-      'Personality Development'
+      'Monthly NDA Pattern Tests',
+      'Books/Study Material Provided',
+      'Progress Reports Shared with Parents',
+      'Digital LED Smart Classes, AC & CCTV Enabled'
     ],
     syllabus: [
       { subject: 'Mathematics', topics: 'Algebra, Trigonometry, Calculus, Statistics, Probability, Geometry' },
@@ -121,9 +121,9 @@ const courseData = {
       { subject: 'SSB Preparation', topics: 'Interview Techniques, Group Discussion, Psychological Tests' }
     ],
     duration: '6-12 Months',
-    batchSize: '20-25 Students',
-    schedule: 'Morning Batches Preferred',
-    eligibility: 'Class 12th Pass (Age 16.5-19.5 years)'
+    batchSize: 'Max 50 Students',
+    schedule: 'Morning & Afternoon Batches',
+    eligibility: 'Class 11th, 12th, 12th Pass (Dropout eligible; Age 16.5-19.5 years)'
   }
 };
 
@@ -188,7 +188,7 @@ const CourseDetail = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     className="btn-primary flex items-center gap-2"
-                    onClick={() => window.location.href = 'tel:+918460597155'}
+                    onClick={() => window.location.href = 'tel:+919812726612'}
                   >
                     <Phone className="w-4 h-4" />
                     Enroll Now
@@ -196,7 +196,7 @@ const CourseDetail = () => {
                   <Button 
                     variant="outline"
                     className="flex items-center gap-2"
-                    onClick={() => window.open('https://wa.me/918460597155?text=Hi!%20I%20want%20to%20know%20more%20about%20' + course.title, '_blank')}
+                    onClick={() => window.open('https://wa.me/919812726612?text=Hi!%20I%20want%20to%20know%20more%20about%20' + course.title, '_blank')}
                   >
                     <MessageCircle className="w-4 h-4" />
                     WhatsApp Inquiry
@@ -297,10 +297,10 @@ const CourseDetail = () => {
                   </p>
                   <Button 
                     className="w-full btn-primary"
-                    onClick={() => window.location.href = 'tel:+918460597155'}
+                    onClick={() => window.location.href = 'tel:+919812726612'}
                   >
                     <Phone className="w-4 h-4 mr-2" />
-                    Call +91 84605 97155
+                    Call +91 98127 26612
                   </Button>
                 </div>
               </Card>

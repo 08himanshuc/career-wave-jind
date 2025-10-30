@@ -24,11 +24,11 @@ const Header = () => {
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center gap-4">
             <a 
-              href="tel:+918460597155" 
+              href="tel:+919812726612" 
               className="flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"
             >
               <Phone className="w-4 h-4" />
-              <span>+91 84605 97155</span>
+              <span>+91 98127 26612</span>
             </a>
             <div className="flex items-center gap-1">
               <MapPin className="w-4 h-4" />
@@ -81,7 +81,7 @@ const Header = () => {
             <div className="flex items-center space-x-4">
               <Button 
                 className="btn-primary hidden sm:flex items-center gap-2"
-                onClick={() => window.location.href = 'tel:+918460597155'}
+                onClick={() => window.location.href = 'tel:+919812726612'}
               >
                 <Phone className="w-4 h-4" />
                 Call Us
@@ -142,10 +142,10 @@ const Header = () => {
                 >
                   <Button 
                     className="btn-primary w-full mt-4 flex items-center justify-center gap-2 btn-smooth mobile-optimized"
-                    onClick={() => window.location.href = 'tel:+918460597155'}
+                    onClick={() => window.location.href = 'tel:+919812726612'}
                   >
                     <Phone className="w-4 h-4" />
-                    Call +91 84605 97155
+                    Call +91 98127 26612
                   </Button>
                 </div>
               </nav>
