@@ -1,7 +1,6 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Breadcrumb from '@/components/Breadcrumb';
-import MobileCTABar from '@/components/MobileCTABar';
 import BackToTop from '@/components/BackToTop';
 import { FileText } from 'lucide-react';
 
@@ -203,7 +202,6 @@ const Terms = () => {
       </main>
 
       <Footer />
-      <MobileCTABar />
       <BackToTop />
     </div>
   );

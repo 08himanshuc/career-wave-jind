@@ -46,12 +46,12 @@ const Header = () => {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <div className="flex-shrink-0">
-              <h1 className="text-2xl font-poppins font-bold text-primary">
+            <div className="flex-shrink-0 flex-1 min-w-0">
+              <h1 className="text-xl sm:text-2xl font-poppins font-bold text-primary truncate">
                 <span className="text-yellow-600">Career Wave Academy Jind</span>
-                <span className="text-sm text-muted-foreground ml-2">(CWA Jind)</span>
+                <span className="text-xs sm:text-sm text-muted-foreground ml-1 sm:ml-2">(CWA Jind)</span>
               </h1>
-              <p className="text-xs text-muted-foreground -mt-1">Best Coaching in Jind</p>
+              <p className="text-xs text-muted-foreground -mt-1 hidden sm:block">Best Coaching in Jind</p>
             </div>
 
             {/* Desktop Navigation */}
@@ -78,7 +78,7 @@ const Header = () => {
             </nav>
 
             {/* CTA Button & Mobile Menu */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
               <Button 
                 className="btn-primary hidden sm:flex items-center gap-2"
                 onClick={() => window.location.href = 'tel:+919812726612'}
@@ -90,7 +90,9 @@ const Header = () => {
               {/* Mobile menu button */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden p-2 rounded-md text-foreground hover:text-primary"
+                className="md:hidden p-2 rounded-md text-foreground hover:text-primary hover:bg-primary/10 transition-all duration-200 flex items-center justify-center min-w-[44px] min-h-[44px]"
+                aria-label="Toggle menu"
+                aria-expanded={isMenuOpen}
               >
                 {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>

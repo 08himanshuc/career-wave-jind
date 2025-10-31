@@ -2,7 +2,6 @@ import { useParams, Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Breadcrumb from '@/components/Breadcrumb';
-import MobileCTABar from '@/components/MobileCTABar';
 import BackToTop from '@/components/BackToTop';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -325,7 +324,6 @@ const CourseDetail = () => {
       </main>
 
       <Footer />
-      <MobileCTABar />
       <BackToTop />
     </div>
   );

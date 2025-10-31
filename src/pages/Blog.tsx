@@ -5,7 +5,6 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Breadcrumb from '@/components/Breadcrumb';
 import FloatingActionButton from '@/components/FloatingActionButton';
-import MobileCTABar from '@/components/MobileCTABar';
 import BackToTop from '@/components/BackToTop';
 import { Link } from 'react-router-dom';
 
@@ -214,7 +213,6 @@ const Blog = () => {
 
       <Footer />
       <FloatingActionButton />
-      <MobileCTABar />
       <BackToTop />
     </div>
   );

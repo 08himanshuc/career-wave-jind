@@ -111,10 +111,13 @@ const AchieversSection = () => {
             opts={{
               align: 'start',
               loop: true,
+              dragFree: true,
             }}
             plugins={[
               Autoplay({
                 delay: 3000,
+                stopOnInteraction: false,
+                stopOnMouseEnter: false,
               }),
             ]}
             className="w-full"

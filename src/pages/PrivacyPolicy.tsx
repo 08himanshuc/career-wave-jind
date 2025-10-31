@@ -1,7 +1,6 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Breadcrumb from '@/components/Breadcrumb';
-import MobileCTABar from '@/components/MobileCTABar';
 import BackToTop from '@/components/BackToTop';
 import { Shield } from 'lucide-react';
 
@@ -169,7 +168,6 @@ const PrivacyPolicy = () => {
       </main>
 
       <Footer />
-      <MobileCTABar />
       <BackToTop />
     </div>
   );
