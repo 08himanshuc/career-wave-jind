@@ -1,82 +1,142 @@
-import { GraduationCap, Medal, Star, Trophy } from 'lucide-react';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { Card } from '@/components/ui/card';
+import { Trophy, ChevronLeft, ChevronRight } from 'lucide-react';
 import useScrollAnimation from '@/hooks/use-scroll-animation';
-import Autoplay from 'embla-carousel-autoplay';
+import { useEffect, useRef, useCallback } from 'react';
+import { Button } from '@/components/ui/button';
+
+// Import WhatsApp images
+import whatsappImage1 from '@/assets/WhatsApp Image 2025-11-18 at 19.12.00.jpeg';
+import whatsappImage2 from '@/assets/WhatsApp Image 2025-11-18 at 19.12.01 (1).jpeg';
+import whatsappImage3 from '@/assets/WhatsApp Image 2025-11-18 at 19.12.01 (2).jpeg';
+import whatsappImage4 from '@/assets/WhatsApp Image 2025-11-18 at 19.12.01.jpeg';
 
 const AchieversSection = () => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
-  const { ref: carouselRef, isVisible: carouselVisible } = useScrollAnimation();
+  const { ref: scrollRef, isVisible: scrollVisible } = useScrollAnimation();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Student achievers data - replace with actual student data
-  const achievers = [
-    {
-      id: 1,
-      name: 'Riya Sharma',
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
-      exam: 'NEET 2024',
-      score: '680/720',
-      rank: 'AIR 245',
-      college: 'AIIMS Delhi',
-      category: 'NEET',
-      color: 'bg-green-500',
-    },
-    {
-      id: 2,
-      name: 'Arjun Verma',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
-      exam: 'IIT-JEE 2024',
-      score: '298/360',
-      rank: 'AIR 512',
-      college: 'IIT Delhi',
-      category: 'JEE',
-      color: 'bg-blue-500',
-    },
-    {
-      id: 3,
-      name: 'Priya Singh',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
-      exam: 'NEET 2024',
-      score: '665/720',
-      rank: 'AIR 478',
-      college: 'MAMC Delhi',
-      category: 'NEET',
-      color: 'bg-green-500',
-    },
-    {
-      id: 4,
-      name: 'Karan Malhotra',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop',
-      exam: 'NDA 2024',
-      score: '385/900',
-      rank: 'Roll No. 1234',
-      college: 'NDA Khadakwasla',
-      category: 'NDA',
-      color: 'bg-orange-500',
-    },
-    {
-      id: 5,
-      name: 'Anjali Yadav',
-      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop',
-      exam: 'CBSE 12th 2024',
-      score: '96.8%',
-      rank: 'School Topper',
-      college: 'Delhi University',
-      category: 'CBSE',
-      color: 'bg-purple-500',
-    },
-    {
-      id: 6,
-      name: 'Rohit Kumar',
-      image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop',
-      exam: 'IIT-JEE 2024',
-      score: '285/360',
-      rank: 'AIR 892',
-      college: 'IIT Bombay',
-      category: 'JEE',
-      color: 'bg-blue-500',
-    },
+  // Array of 4 achiever images
+  const achieverImages = [
+    whatsappImage1,
+    whatsappImage2,
+    whatsappImage3,
+    whatsappImage4,
   ];
+
+  // Calculate scroll amount (one image width + gap)
+  const getScrollAmount = useCallback(() => {
+    if (!containerRef.current) return 0;
+    const container = containerRef.current;
+    const firstChild = container.firstElementChild as HTMLElement;
+    if (!firstChild) return 0;
+    // Get computed width including gap (gap-6 = 24px = 1.5rem)
+    const gap = 24; // 6 * 4px = 24px (gap-6)
+    return firstChild.offsetWidth + gap;
+  }, []);
+
+  // Manual navigation functions
+  const scrollLeft = useCallback((e?: React.MouseEvent | React.TouchEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (!containerRef.current) return;
+    const container = containerRef.current;
+    
+    // Use a fixed scroll amount for mobile or calculate it
+    const firstChild = container.firstElementChild as HTMLElement;
+    if (!firstChild) return;
+    
+    const gap = 24; // gap-6 = 24px
+    const scrollAmount = firstChild.offsetWidth + gap;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    const currentScroll = container.scrollLeft;
+    
+    // If at the start, loop to the end for infinite scroll
+    if (currentScroll <= 5) { // Add small tolerance for rounding
+      container.scrollTo({
+        left: maxScroll,
+        behavior: 'smooth',
+      });
+    } else {
+      const newScroll = Math.max(0, currentScroll - scrollAmount);
+      container.scrollTo({
+        left: newScroll,
+        behavior: 'smooth',
+      });
+    }
+  }, []);
+
+  const scrollRight = useCallback((e?: React.MouseEvent | React.TouchEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (!containerRef.current) return;
+    const container = containerRef.current;
+    
+    // Use a fixed scroll amount for mobile or calculate it
+    const firstChild = container.firstElementChild as HTMLElement;
+    if (!firstChild) return;
+    
+    const gap = 24; // gap-6 = 24px
+    const scrollAmount = firstChild.offsetWidth + gap;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    const currentScroll = container.scrollLeft;
+    
+    // If at the end, loop to the start for infinite scroll
+    if (currentScroll >= maxScroll - 5) { // Add small tolerance for rounding
+      container.scrollTo({
+        left: 0,
+        behavior: 'smooth',
+      });
+    } else {
+      const newScroll = Math.min(maxScroll, currentScroll + scrollAmount);
+      container.scrollTo({
+        left: newScroll,
+        behavior: 'smooth',
+      });
+    }
+  }, []);
+
+  // Auto-scroll effect - every 2 seconds from left to right (infinite, non-stop)
+  useEffect(() => {
+    if (!containerRef.current || !scrollVisible) return;
+
+    const container = containerRef.current;
+    
+    // Function to auto-scroll to the right
+    const autoScroll = () => {
+      if (!containerRef.current) return;
+      const container = containerRef.current;
+      const scrollAmount = getScrollAmount();
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      const currentScroll = container.scrollLeft;
+      
+      // Calculate next scroll position
+      let nextScroll = currentScroll + scrollAmount;
+      
+      // If we've reached or passed the end, reset to start for infinite loop
+      if (nextScroll >= maxScroll) {
+        nextScroll = 0;
+      }
+      
+      container.scrollTo({
+        left: nextScroll,
+        behavior: 'smooth',
+      });
+    };
+
+    // Start auto-scroll every 2 seconds (2000ms)
+    autoScrollIntervalRef.current = setInterval(autoScroll, 2000);
+
+    return () => {
+      if (autoScrollIntervalRef.current) {
+        clearInterval(autoScrollIntervalRef.current);
+        autoScrollIntervalRef.current = null;
+      }
+    };
+  }, [scrollVisible, getScrollAmount]);
 
   return (
     <section id="achievers" className="py-20 bg-background">
@@ -100,119 +160,131 @@ const AchieversSection = () => {
           </p>
         </div>
 
-        {/* Carousel */}
+        {/* Achievers Images with Auto-Scroll */}
         <div 
-          ref={carouselRef}
-          className={`transition-all duration-700 ease-out ${
-            carouselVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          ref={scrollRef}
+          className={`transition-all duration-700 ease-out relative ${
+            scrollVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <Carousel
-            opts={{
-              align: 'start',
-              loop: true,
-              dragFree: true,
-            }}
-            plugins={[
-              Autoplay({
-                delay: 3000,
-                stopOnInteraction: false,
-                stopOnMouseEnter: false,
-              }),
-            ]}
-            className="w-full"
+          {/* Left Arrow Button */}
+          <Button
+            onClick={scrollLeft}
+            variant="outline"
+            size="icon"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white border-2 border-primary/20 hover:border-primary shadow-lg h-12 w-12 rounded-full hidden md:flex items-center justify-center transition-all duration-300 mobile-optimized"
+            aria-label="Scroll left"
           >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {achievers.map((student, index) => (
-                <CarouselItem key={student.id} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                  <Card 
-                    className="group overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white/90 backdrop-blur-sm border-2 border-transparent hover:border-primary/20 mobile-optimized"
-                    style={{
-                      transitionDelay: `${index * 50}ms`,
-                      opacity: carouselVisible ? 1 : 0,
-                      transform: carouselVisible ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)'
-                    }}
-                  >
-                    {/* Student Photo */}
-                    <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
-                      <img
-                        src={student.image}
-                        alt={student.name}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        loading="lazy"
-                      />
-                      
-                      {/* Overlay Gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      
-                      {/* Category Badge */}
-                      <div className="absolute top-3 right-3">
-                        <div className={`${student.color} text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1`}>
-                          <Star className="w-3 h-3" />
-                          {student.category}
-                        </div>
-                      </div>
+            <ChevronLeft className="h-6 w-6 text-primary" />
+          </Button>
 
-                      {/* Rank Badge */}
-                      <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-foreground px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                        {student.rank}
-                      </div>
-                    </div>
+          {/* Right Arrow Button */}
+          <Button
+            onClick={scrollRight}
+            variant="outline"
+            size="icon"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white border-2 border-primary/20 hover:border-primary shadow-lg h-12 w-12 rounded-full hidden md:flex items-center justify-center transition-all duration-300 mobile-optimized"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="h-6 w-6 text-primary" />
+          </Button>
 
-                    {/* Student Info */}
-                    <div className="p-6 space-y-3">
-                      {/* Name */}
-                      <div className="text-center">
-                        <h3 className="text-xl font-poppins font-bold text-foreground group-hover:text-primary transition-colors">
-                          {student.name}
-                        </h3>
-                      </div>
-
-                      {/* Exam Details */}
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-muted-foreground font-medium">Exam:</span>
-                          <span className="text-sm font-semibold text-foreground">{student.exam}</span>
-                        </div>
-                        
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-muted-foreground font-medium">Score:</span>
-                          <span className="text-sm font-bold text-primary">{student.score}</span>
-                        </div>
-
-                        <div className="flex items-center justify-between pt-2 border-t border-border">
-                          <div className="flex items-center gap-1 text-muted-foreground">
-                            <GraduationCap className="w-4 h-4" />
-                            <span className="text-xs">College:</span>
-                          </div>
-                          <span className="text-xs font-semibold text-foreground">{student.college}</span>
-                        </div>
-                      </div>
-
-                      {/* Achievement Icon */}
-                      <div className="flex justify-center pt-2">
-                        <div className="w-10 h-10 bg-success/10 rounded-full flex items-center justify-center group-hover:bg-success group-hover:scale-110 transition-all duration-300">
-                          <Medal className="w-5 h-5 text-success group-hover:text-white transition-colors" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Decorative Element */}
-                    <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all duration-500"></div>
-                  </Card>
-                </CarouselItem>
+          <div className="overflow-hidden relative">
+            <div
+              ref={containerRef}
+              className="flex gap-6 overflow-x-auto scrollbar-hide"
+              style={{
+                scrollSnapType: 'x mandatory',
+              }}
+            >
+              {achieverImages.map((image, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 group"
+                  style={{
+                    width: 'calc(25% - 18px)', // Show all 4 at once on desktop
+                    minWidth: '300px', // Minimum width for each image on mobile
+                    scrollSnapAlign: 'start',
+                  }}
+                >
+                  <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 border-transparent hover:border-primary/20 bg-white/90 backdrop-blur-sm h-full">
+                    <img
+                      src={image}
+                      alt={`Achiever ${index + 1}`}
+                      className="w-full h-auto object-contain max-h-[700px] mx-auto"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
               ))}
-            </CarouselContent>
-            
-            {/* Navigation Buttons */}
-            <CarouselPrevious className="hidden md:flex -left-4 lg:-left-12 bg-white/90 hover:bg-white border-2 border-primary/20 hover:border-primary transition-all duration-300 mobile-optimized" />
-            <CarouselNext className="hidden md:flex -right-4 lg:-right-12 bg-white/90 hover:bg-white border-2 border-primary/20 hover:border-primary transition-all duration-300 mobile-optimized" />
-          </Carousel>
-
-          {/* Mobile Swipe Hint */}
-          <p className="text-center text-muted-foreground text-sm mt-8 md:hidden animate-pulse-soft">
-            ← Swipe to see more achievers →
-          </p>
+              
+              {/* Duplicate images for seamless loop */}
+              {achieverImages.map((image, index) => (
+                <div
+                  key={`duplicate-${index}`}
+                  className="flex-shrink-0 group"
+                  style={{
+                    width: 'calc(25% - 18px)',
+                    minWidth: '300px',
+                    scrollSnapAlign: 'start',
+                  }}
+                >
+                  <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 border-transparent hover:border-primary/20 bg-white/90 backdrop-blur-sm h-full">
+                    <img
+                      src={image}
+                      alt={`Achiever ${index + 1}`}
+                      className="w-full h-auto object-contain max-h-[700px] mx-auto"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Mobile Arrow Buttons */}
+          <div className="flex justify-center gap-4 mt-6 md:hidden z-20 relative">
+            <Button
+              onClick={scrollLeft}
+              onTouchStart={(e) => {
+                e.preventDefault();
+                scrollLeft(e);
+              }}
+              type="button"
+              variant="outline"
+              size="icon"
+              className="bg-white hover:bg-white active:bg-primary/10 border-2 border-primary/20 active:border-primary shadow-lg h-14 w-14 rounded-full transition-all duration-300 mobile-optimized touch-manipulation cursor-pointer"
+              style={{
+                WebkitTapHighlightColor: 'transparent',
+                touchAction: 'manipulation',
+                pointerEvents: 'auto',
+                zIndex: 20,
+              }}
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="h-7 w-7 text-primary" />
+            </Button>
+            <Button
+              onClick={scrollRight}
+              onTouchStart={(e) => {
+                e.preventDefault();
+                scrollRight(e);
+              }}
+              type="button"
+              variant="outline"
+              size="icon"
+              className="bg-white hover:bg-white active:bg-primary/10 border-2 border-primary/20 active:border-primary shadow-lg h-14 w-14 rounded-full transition-all duration-300 mobile-optimized touch-manipulation cursor-pointer"
+              style={{
+                WebkitTapHighlightColor: 'transparent',
+                touchAction: 'manipulation',
+                pointerEvents: 'auto',
+                zIndex: 20,
+              }}
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="h-7 w-7 text-primary" />
+            </Button>
+          </div>
         </div>
 
         {/* Stats Banner */}
