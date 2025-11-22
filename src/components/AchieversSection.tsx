@@ -127,8 +127,8 @@ const AchieversSection = () => {
       });
     };
 
-    // Start auto-scroll every 2 seconds (2000ms)
-    autoScrollIntervalRef.current = setInterval(autoScroll, 2000);
+    // Start auto-scroll every 4 seconds (4000ms)
+    autoScrollIntervalRef.current = setInterval(autoScroll, 4000);
 
     return () => {
       if (autoScrollIntervalRef.current) {
@@ -192,7 +192,7 @@ const AchieversSection = () => {
           <div className="overflow-hidden relative">
             <div
               ref={containerRef}
-              className="flex gap-6 overflow-x-auto scrollbar-hide"
+              className="flex gap-6 overflow-x-auto scrollbar-hide justify-center"
               style={{
                 scrollSnapType: 'x mandatory',
               }}
@@ -200,14 +200,14 @@ const AchieversSection = () => {
               {achieverImages.map((image, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 group"
+                  className="flex-shrink-0 group flex items-center justify-center"
                   style={{
                     width: 'calc(25% - 18px)', // Show all 4 at once on desktop
                     minWidth: '300px', // Minimum width for each image on mobile
-                    scrollSnapAlign: 'start',
+                    scrollSnapAlign: 'center',
                   }}
                 >
-                  <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 border-transparent hover:border-primary/20 bg-white/90 backdrop-blur-sm h-full">
+                  <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 border-transparent hover:border-primary/20 bg-white/90 backdrop-blur-sm h-full w-full flex items-center justify-center">
                     <img
                       src={image}
                       alt={`Achiever ${index + 1}`}
@@ -222,14 +222,14 @@ const AchieversSection = () => {
               {achieverImages.map((image, index) => (
                 <div
                   key={`duplicate-${index}`}
-                  className="flex-shrink-0 group"
+                  className="flex-shrink-0 group flex items-center justify-center"
                   style={{
                     width: 'calc(25% - 18px)',
                     minWidth: '300px',
-                    scrollSnapAlign: 'start',
+                    scrollSnapAlign: 'center',
                   }}
                 >
-                  <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 border-transparent hover:border-primary/20 bg-white/90 backdrop-blur-sm h-full">
+                  <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 border-transparent hover:border-primary/20 bg-white/90 backdrop-blur-sm h-full w-full flex items-center justify-center">
                     <img
                       src={image}
                       alt={`Achiever ${index + 1}`}
@@ -284,28 +284,6 @@ const AchieversSection = () => {
             >
               <ChevronRight className="h-7 w-7 text-primary" />
             </Button>
-          </div>
-        </div>
-
-        {/* Stats Banner */}
-        <div className="mt-16 bg-gradient-to-r from-primary/10 via-secondary/10 to-success/10 rounded-2xl p-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="space-y-2">
-              <div className="text-3xl md:text-4xl font-poppins font-bold text-primary">1200+</div>
-              <div className="text-sm text-muted-foreground">Success Stories</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-3xl md:text-4xl font-poppins font-bold text-primary">95%</div>
-              <div className="text-sm text-muted-foreground">Success Rate</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-3xl md:text-4xl font-poppins font-bold text-primary">200+</div>
-              <div className="text-sm text-muted-foreground">NEET Qualifiers</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-3xl md:text-4xl font-poppins font-bold text-primary">150+</div>
-              <div className="text-sm text-muted-foreground">IIT-JEE Selections</div>
-            </div>
           </div>
         </div>
       </div>

@@ -1,11 +1,14 @@
-import { Award, Trophy, Calendar } from 'lucide-react';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Award, Trophy, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import useScrollAnimation from '@/hooks/use-scroll-animation';
-import Autoplay from 'embla-carousel-autoplay';
+import { useEffect, useRef, useCallback, useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 const GallerySection = () => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
   const { ref: carouselRef, isVisible: carouselVisible } = useScrollAnimation();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   // Gallery images data - replace with actual achievement photos
   const galleryItems = [
@@ -108,6 +111,163 @@ const GallerySection = () => {
     // },
   ];
 
+  // Calculate scroll amount (one image width + gap)
+  const getScrollAmount = useCallback(() => {
+    if (!containerRef.current) return 0;
+    const container = containerRef.current;
+    const firstChild = container.firstElementChild as HTMLElement;
+    if (!firstChild) return 0;
+    const gap = 24; // gap-6 = 24px
+    return firstChild.offsetWidth + gap;
+  }, []);
+
+  // Manual navigation functions
+  const scrollLeft = useCallback((e?: React.MouseEvent | React.TouchEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (!containerRef.current) return;
+    const container = containerRef.current;
+    
+    const firstChild = container.firstElementChild as HTMLElement;
+    if (!firstChild) return;
+    
+    const gap = 24;
+    const scrollAmount = firstChild.offsetWidth + gap;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    const currentScroll = container.scrollLeft;
+    
+    const handleScrollEnd = () => {
+      const singleItemWidth = container.scrollWidth / 2 / galleryItems.length;
+      const newIndex = Math.round(container.scrollLeft / singleItemWidth) % galleryItems.length;
+      setCurrentIndex(newIndex);
+      container.removeEventListener('scrollend', handleScrollEnd);
+    };
+    container.addEventListener('scrollend', handleScrollEnd);
+    
+    if (currentScroll <= 5) {
+      container.scrollTo({
+        left: maxScroll,
+        behavior: 'smooth',
+      });
+    } else {
+      const newScroll = Math.max(0, currentScroll - scrollAmount);
+      container.scrollTo({
+        left: newScroll,
+        behavior: 'smooth',
+      });
+    }
+  }, [galleryItems.length]);
+
+  const scrollRight = useCallback((e?: React.MouseEvent | React.TouchEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (!containerRef.current) return;
+    const container = containerRef.current;
+    
+    const firstChild = container.firstElementChild as HTMLElement;
+    if (!firstChild) return;
+    
+    const gap = 24;
+    const scrollAmount = firstChild.offsetWidth + gap;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    const currentScroll = container.scrollLeft;
+    
+    const handleScrollEnd = () => {
+      const singleItemWidth = container.scrollWidth / 2 / galleryItems.length;
+      const newIndex = Math.round(container.scrollLeft / singleItemWidth) % galleryItems.length;
+      setCurrentIndex(newIndex);
+      container.removeEventListener('scrollend', handleScrollEnd);
+    };
+    container.addEventListener('scrollend', handleScrollEnd);
+    
+    if (currentScroll >= maxScroll - 5) {
+      container.scrollTo({
+        left: 0,
+        behavior: 'smooth',
+      });
+    } else {
+      const newScroll = Math.min(maxScroll, currentScroll + scrollAmount);
+      container.scrollTo({
+        left: newScroll,
+        behavior: 'smooth',
+      });
+    }
+  }, [galleryItems.length]);
+
+  // Update current index based on scroll position
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const container = containerRef.current;
+    const updateIndex = () => {
+      if (!container) return;
+      const currentScroll = container.scrollLeft;
+      const singleItemWidth = container.scrollWidth / 2 / galleryItems.length;
+      
+      // Calculate which item is currently in view
+      const scrollIndex = Math.round(currentScroll / singleItemWidth) % galleryItems.length;
+      setCurrentIndex(scrollIndex >= 0 ? scrollIndex : galleryItems.length - 1);
+    };
+
+    // Use a timeout to debounce scroll events
+    let timeoutId: NodeJS.Timeout;
+    const handleScroll = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(updateIndex, 100);
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    updateIndex(); // Initial update
+    
+    return () => {
+      clearTimeout(timeoutId);
+      container.removeEventListener('scroll', handleScroll);
+    };
+  }, [galleryItems.length]);
+
+  // Auto-scroll effect - every 4 seconds
+  useEffect(() => {
+    if (!containerRef.current || !carouselVisible) return;
+
+    const container = containerRef.current;
+    
+    const autoScroll = () => {
+      if (!containerRef.current) return;
+      const container = containerRef.current;
+      const scrollAmount = getScrollAmount();
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      const currentScroll = container.scrollLeft;
+      
+      let nextScroll = currentScroll + scrollAmount;
+      
+      if (nextScroll >= maxScroll) {
+        nextScroll = 0;
+      }
+      
+      container.scrollTo({
+        left: nextScroll,
+        behavior: 'smooth',
+      });
+    };
+
+    autoScrollIntervalRef.current = setInterval(autoScroll, 4000);
+
+    return () => {
+      if (autoScrollIntervalRef.current) {
+        clearInterval(autoScrollIntervalRef.current);
+        autoScrollIntervalRef.current = null;
+      }
+    };
+  }, [carouselVisible, getScrollAmount]);
+
+  // Get current item details
+  const currentItem = galleryItems[currentIndex];
+  const IconComponent = currentItem?.icon || Calendar;
+
   return (
     <section id="gallery" className="py-20 bg-gradient-to-b from-primary/5 to-transparent">
       <div className="container mx-auto px-4">
@@ -130,84 +290,158 @@ const GallerySection = () => {
           </p>
         </div>
 
-        {/* Carousel */}
+        {/* Gallery Slider */}
         <div 
           ref={carouselRef}
-          className={`transition-all duration-700 ease-out ${
+          className={`transition-all duration-700 ease-out relative ${
             carouselVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <Carousel
-            opts={{
-              align: 'start',
-              loop: true,
-              dragFree: true,
-            }}
-            plugins={[
-              Autoplay({
-                delay: 4000,
-                stopOnInteraction: false,
-                stopOnMouseEnter: false,
-              }),
-            ]}
-            className="w-full max-w-6xl mx-auto"
+          {/* Left Arrow Button */}
+          <Button
+            onClick={scrollLeft}
+            variant="outline"
+            size="icon"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white border-2 border-primary/20 hover:border-primary shadow-lg h-12 w-12 rounded-full hidden md:flex items-center justify-center transition-all duration-300 mobile-optimized"
+            aria-label="Scroll left"
           >
-            <CarouselContent>
-              {galleryItems.map((item, index) => {
-                const IconComponent = item.icon;
-                return (
-                  <CarouselItem key={item.id}>
-                    <div className="group relative">
-                      {/* Image Container */}
-                      <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          loading="lazy"
-                        />
-                        
-                        {/* Gradient Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-                        
-                        {/* Category Badge */}
-                        <div className="absolute top-6 left-6">
-                          <div className="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 animate-fadeInLeft">
-                            <IconComponent className="w-4 h-4" />
-                            {item.category}
-                          </div>
-                        </div>
+            <ChevronLeft className="h-6 w-6 text-primary" />
+          </Button>
 
-                        {/* Content Overlay */}
-                        <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                          <h3 className="text-2xl sm:text-3xl font-poppins font-bold mb-2 animate-fadeInUp">
-                            {item.title}
-                          </h3>
-                          <p className="text-white/90 text-base sm:text-lg animate-fadeInUp" style={{animationDelay: '0.1s'}}>
-                            {item.description}
-                          </p>
-                        </div>
+          {/* Right Arrow Button */}
+          <Button
+            onClick={scrollRight}
+            variant="outline"
+            size="icon"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white border-2 border-primary/20 hover:border-primary shadow-lg h-12 w-12 rounded-full hidden md:flex items-center justify-center transition-all duration-300 mobile-optimized"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="h-6 w-6 text-primary" />
+          </Button>
 
-                        {/* Slide Number Indicator */}
-                        <div className="absolute top-6 right-6 bg-black/40 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">
-                          {index + 1} / {galleryItems.length}
-                        </div>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                );
-              })}
-            </CarouselContent>
-            
-            {/* Navigation Buttons */}
-            <CarouselPrevious className="hidden md:flex -left-4 lg:-left-12 bg-white/90 hover:bg-white border-2 border-primary/20 hover:border-primary transition-all duration-300 mobile-optimized" />
-            <CarouselNext className="hidden md:flex -right-4 lg:-right-12 bg-white/90 hover:bg-white border-2 border-primary/20 hover:border-primary transition-all duration-300 mobile-optimized" />
-          </Carousel>
+          {/* Images Slider */}
+          <div className="overflow-hidden relative">
+            <div
+              ref={containerRef}
+              className="flex gap-6 overflow-x-auto scrollbar-hide justify-center"
+              style={{
+                scrollSnapType: 'x mandatory',
+              }}
+            >
+              {galleryItems.map((item, index) => (
+                <div
+                  key={item.id}
+                  className="flex-shrink-0 group"
+                  style={{
+                    width: '100%',
+                    maxWidth: '1000px',
+                    minWidth: '100%',
+                    scrollSnapAlign: 'center',
+                  }}
+                >
+                  <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-gray-900">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              ))}
+              
+              {/* Duplicate images for seamless loop */}
+              {galleryItems.map((item, index) => (
+                <div
+                  key={`duplicate-${item.id}`}
+                  className="flex-shrink-0 group"
+                  style={{
+                    width: '100%',
+                    maxWidth: '1000px',
+                    minWidth: '100%',
+                    scrollSnapAlign: 'center',
+                  }}
+                >
+                  <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-gray-900">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-          {/* Mobile Swipe Hint */}
-          <p className="text-center text-muted-foreground text-sm mt-6 md:hidden animate-pulse-soft">
-            ← Swipe to see more →
-          </p>
+          {/* Text Details Below in White Area */}
+          <div className="mt-6 bg-white rounded-2xl p-6 shadow-lg">
+            <div className="max-w-4xl mx-auto">
+              {/* Category Badge */}
+              <div className="flex items-center gap-2 mb-4">
+                <div className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
+                  <IconComponent className="w-4 h-4" />
+                  {currentItem?.category}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {currentIndex + 1} / {galleryItems.length}
+                </div>
+              </div>
+
+              {/* Title and Description */}
+              <h3 className="text-2xl sm:text-3xl font-poppins font-bold text-foreground mb-3">
+                {currentItem?.title}
+              </h3>
+              <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
+                {currentItem?.description}
+              </p>
+            </div>
+          </div>
+
+          {/* Mobile Arrow Buttons */}
+          <div className="flex justify-center gap-4 mt-6 md:hidden z-20 relative">
+            <Button
+              onClick={scrollLeft}
+              onTouchStart={(e) => {
+                e.preventDefault();
+                scrollLeft(e);
+              }}
+              type="button"
+              variant="outline"
+              size="icon"
+              className="bg-white hover:bg-white active:bg-primary/10 border-2 border-primary/20 active:border-primary shadow-lg h-14 w-14 rounded-full transition-all duration-300 mobile-optimized touch-manipulation cursor-pointer"
+              style={{
+                WebkitTapHighlightColor: 'transparent',
+                touchAction: 'manipulation',
+                pointerEvents: 'auto',
+                zIndex: 20,
+              }}
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="h-7 w-7 text-primary" />
+            </Button>
+            <Button
+              onClick={scrollRight}
+              onTouchStart={(e) => {
+                e.preventDefault();
+                scrollRight(e);
+              }}
+              type="button"
+              variant="outline"
+              size="icon"
+              className="bg-white hover:bg-white active:bg-primary/10 border-2 border-primary/20 active:border-primary shadow-lg h-14 w-14 rounded-full transition-all duration-300 mobile-optimized touch-manipulation cursor-pointer"
+              style={{
+                WebkitTapHighlightColor: 'transparent',
+                touchAction: 'manipulation',
+                pointerEvents: 'auto',
+                zIndex: 20,
+              }}
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="h-7 w-7 text-primary" />
+            </Button>
+          </div>
         </div>
       </div>
     </section>
