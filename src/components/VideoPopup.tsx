@@ -32,8 +32,16 @@ const VideoPopup = () => {
     sessionStorage.setItem('careerwave-video-popup-seen', 'true');
   };
 
-  // Hinglish description
-  const description = "Hamare students ne NEET, IIT-JEE, CBSE aur NDA mein top colleges mein selection liya. Dekhiye unki success stories aur kaise Career Wave Academy ne unhein help ki.";
+  // Video titles/highlights (mix of Hindi, Hinglish, English)
+  const videoTitles = [
+    "Top NEET Students ka Selection",
+    "IIT-JEE Toppers ki Success Story",
+    "CBSE Board Exams mein 95%+ Marks",
+    "NDA Selection ki Journey"
+  ];
+
+  // Short description (mix of Hindi, Hinglish, English)
+  const description = "Career Wave Academy Jind ke students ne achieve kiya success! Dekhiye kaise hamare students ne NEET, IIT-JEE, CBSE, aur NDA exams clear karke top colleges mein admission liya. Real students, real success stories!";
 
   if (!isOpen) return null;
 
@@ -48,6 +56,24 @@ const VideoPopup = () => {
         >
           <X className="w-5 h-5 text-gray-700" />
         </button>
+
+        {/* Bold Headline with Titles */}
+        <div className="px-6 pt-6 pb-4 bg-gradient-to-r from-primary/5 via-secondary/5 to-success/5">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-gray-900 mb-4 text-center leading-tight">
+            Success Stories: Hamare Achievers
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+            {videoTitles.map((title, index) => (
+              <div 
+                key={index}
+                className="flex items-center gap-2 text-sm sm:text-base font-semibold text-gray-800"
+              >
+                <span className="text-primary font-bold">✓</span>
+                <span>{title}</span>
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* Video Embed */}
         <div className="relative">
@@ -65,8 +91,8 @@ const VideoPopup = () => {
               >
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors"></div>
                 <div className="relative z-10 text-center">
-                  <div className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-red-700 group-hover:scale-110 transition-all duration-300 shadow-2xl">
-                    <svg className="w-10 h-10 ml-1 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-red-700 group-hover:scale-110 transition-all duration-300 shadow-2xl">
+                    <svg className="w-8 h-8 ml-1 text-white" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z"/>
                     </svg>
                   </div>
@@ -91,9 +117,9 @@ const VideoPopup = () => {
           </div>
         </div>
 
-        {/* Hinglish Description */}
-        <div className="p-6 text-center">
-          <p className="text-gray-700 text-base leading-relaxed">
+        {/* Short Description */}
+        <div className="p-6 text-center bg-gray-50">
+          <p className="text-gray-700 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
             {description}
           </p>
         </div>
