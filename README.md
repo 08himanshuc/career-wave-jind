@@ -16,7 +16,7 @@ This website showcases our academy's courses, facilities, and contact informatio
 
 ## 🚀 How to Access the Website
 
-The website is live and accessible at: **https://your-domain.com** (update this with your actual domain)
+The website is live and accessible at: **https://cwajind.in**
 
 If you need to see what changes look like before they go live, you can run it locally on your computer (see below).
 
